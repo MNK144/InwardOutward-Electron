@@ -1,0 +1,39 @@
+.CustomerTable {
+  margin-top: 10px;
+}
+
+.CustomerTable table,
+td {
+  border: 1px solid black;
+}
+
+
+/* TABLE TEMPLATE TAKEN FROM CODEPEN */
+.cst_table {
+  margin: 0 0 40px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+.cst_row {
+  display: table-row;
+  background: #f6f6f6;
+}
+.cst_row:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.cst_row.cst_header {
+  font-weight: 900;
+  color: #ffffff;
+  background: #2980b9;
+}
+.cst_cell {
+  padding: 12px 12px;
+  display: table-cell;
+}
+
+.cust_table_empty {
+  display: flex;
+  margin-top: 70px;
+  justify-content: center;
+}

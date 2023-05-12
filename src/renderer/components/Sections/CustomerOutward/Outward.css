@@ -1,0 +1,102 @@
+
+.Outward {
+    margin-top: 14px;
+    padding: 47px 47px;
+    /* background-color: #bbbbbb; */
+    font-weight: 600;
+}
+
+.Outward h2 {
+    color: #0e45a1;
+    margin-bottom: 15px;
+    margin-left: 5px;
+}
+
+.Outward hr {
+    margin-bottom: 24px;
+}
+
+/* .Outward_form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+} */
+
+.Outward_form {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    margin-left: -10px;
+}
+
+.Outward_formControl {
+    margin-top: 7px;
+    display: flex;
+}
+.Outward_formControl label {
+   display: inline-block;
+   margin-top: 4px;
+   width: 120px;
+   text-align: end;
+}
+
+.Outward_formActions {
+    margin-top: 12px;
+    display: flex;
+}
+
+.Outward_formActions label {
+    display: inline-block;
+    margin-top: 4px;
+    width: 150px;
+    text-align: end;
+}
+
+.Outward_formControlJobId {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.Outward_jobid {
+    padding-right: 2px;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.Outward_selectInwardBtn {
+    margin-left: 130px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 24px;
+    background-color: #26c281;
+    color: white;
+}
+
+.Outward_selectInwardBtn:hover {
+    background-color: #16b170;
+}
+
+.Outward_productTable {
+    margin-top: 1px;
+}
+
+
+.Outward_bottomForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Outward_bottomForm label {
+    font-weight: 700;
+}
+
+.Outward_bottmFormControl {
+    margin-left: 15px;
+}
+
+.Outward_formDivider {
+    margin-left: 24px;
+}

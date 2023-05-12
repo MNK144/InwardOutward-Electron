@@ -1,0 +1,85 @@
+.InwardRegister {
+    margin-top: 14px;
+    padding: 31px 31px;
+    /* background-color: #bbbbbb; */
+    font-weight: 600;
+}
+
+.InwardRegister_topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.InwardRegister_topbar p {
+    margin: 0px;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.InwardRegister hr {
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+
+.InwardRegister_form {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    margin-left: -10px;
+}
+
+.InwardRegister_formControl {
+    margin-top: 7px;
+    display: flex;
+}
+.InwardRegister_formControl label {
+   display: inline-block;
+   margin-top: 4px;
+   width: 120px;
+   text-align: end;
+}
+
+.InwardRegister_formActions {
+    margin-top: 12px;
+    display: flex;
+}
+
+.InwardRegister_formActions label {
+    display: inline-block;
+    margin-top: 4px;
+    width: 150px;
+    text-align: end;
+}
+
+
+.InwardRegister_searchBtn {
+    margin-left: 130px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 24px;
+    background-color: #26c281;
+    color: white;
+}
+.InwardRegister_clearBtn {
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 24px;
+    background-color: #fe6767;
+    color: white;
+}
+
+.InwardRegister_searchBtn:hover {
+    background-color: #16b170;
+}
+.InwardRegister_clearBtn:hover {
+    background-color: #f03434;
+}
+
+
+.InwardRegister_formDivider {
+    margin-left: 24px;
+}

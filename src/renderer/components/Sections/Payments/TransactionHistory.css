@@ -1,0 +1,28 @@
+
+.TransactionHistory {
+    padding: 10px;
+    padding-top: 8px;
+    width: 670px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TransactionHistory h2 {
+    color: #0e45a1;
+}
+
+.TransactionHistory_Modal {
+    background-color: #eeeeee;
+    top: 40%;
+    padding: 10px
+}
+
+
+.TransactionHistory_tableDiv{
+    height: 400px;
+    width: 600px;
+    padding: 2px;
+    overflow: auto;
+    scrollbar-width: 5px;
+}

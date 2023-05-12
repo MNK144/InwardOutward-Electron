@@ -1,0 +1,20 @@
+.CustomerInward {
+    padding: 1px;
+}
+
+.inward_topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inward_topbar p {
+    margin: 0px;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.inward_topbar_btn {
+    align-self: flex-end;
+}

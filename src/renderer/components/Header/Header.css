@@ -1,0 +1,17 @@
+.Header {
+  background: #0e45a1;
+  color: white;
+  /* padding-bottom: 20px; */
+  position: fixed ;
+  padding: auto;
+  height: 100%;
+  width: 250px;
+  border-width: 0 1px 0 0;
+  border-color: #72a1f3;
+  border-style: solid;
+  overflow-y: scroll;
+}
+
+.Header h1 {
+  margin: 47px 20px;
+}

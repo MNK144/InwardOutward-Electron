@@ -1,0 +1,20 @@
+.Customers {
+    padding: 1px;
+}
+
+.customer_topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.customer_topbar p {
+    margin: 0px;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.customer_topbar_btn {
+    align-self: flex-end;
+}

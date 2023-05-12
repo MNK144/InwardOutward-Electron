@@ -1,0 +1,24 @@
+.PaymentProductTable {
+    margin-top: 0px;
+    height: 200px;
+    overflow: scroll;
+  }
+  
+  .paymentProduct_table_empty {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+  }
+  
+  .paymentProduct_cell_actions {
+      display: flex;
+      width: 70px;
+      font-size: 19px;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .paymentProduct_cell_override {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }

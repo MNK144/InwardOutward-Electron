@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #dedede;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.rdt_TableHeadRow {
+  display: block;
+  background-color: #2980b9;
+}
+
+.rdt_TableRow {
+  display: table-row;
+  background: #f6f6f6;
+}
+.rdt_TableRow:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+
+.rdt_TableCell {
+  color: black;
+  font-weight: 500;
+  font-size: 13.2px;
+}
+
+ /* {
+  background-color: transparent;
+} */
+
+/*
+rdt_TableCol
+rdt_TableCol_Sortable
+rdt_TableCell
+rdt_TableHeader
+rdt_TableFooter
+rdt_TableHead
+rdt_TableBody
+rdt_ExpanderRow
+*/
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+/* Track */
+/* ::-webkit-scrollbar-track {
+  background: #0e45a1;
+} */
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

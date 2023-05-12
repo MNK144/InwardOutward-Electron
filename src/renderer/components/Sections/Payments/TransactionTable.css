@@ -1,0 +1,22 @@
+.TransactionTable {
+  margin-top: 0px;
+}
+
+.transactionTable_table_empty {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.transactionTable_cell_actions {
+  display: flex;
+  width: 70px;
+  font-size: 19px;
+  justify-content: center;
+  align-items: center;
+}
+
+.transactionTable_cell_override {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

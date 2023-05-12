@@ -1,0 +1,22 @@
+.InwardAddTable {
+    margin-top: 0px;
+  }
+  
+  .inwardAdd_table_empty {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+  }
+  
+  .inwardAdd_cell_actions {
+      display: flex;
+      width: 70px;
+      font-size: 19px;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .inwardAdd_cell_override {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }

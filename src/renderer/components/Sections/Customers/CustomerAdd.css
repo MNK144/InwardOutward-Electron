@@ -1,0 +1,38 @@
+.CustomerAdd {
+    margin-top: 14px;
+    padding: 47px 47px;
+    /* background-color: #bbbbbb; */
+    font-weight: 600;
+}
+
+.CustomerAdd h2 {
+    color: #0e45a1;
+    margin-bottom: 25px;
+    margin-left: 5px;
+}
+
+/* .custAdd_form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+} */
+
+.custAdd_form {
+    margin-bottom: 12px;
+}
+
+.custAdd_formControl {
+    margin-top: 7px;
+    display: flex;
+}
+.custAdd_formControl label {
+   display: inline-block;
+   margin-top: 4px;
+   width: 120px;
+   text-align: end;
+}
+
+.custAdd_formActions {
+    margin-top: 24px;
+    margin-left: 130px;
+}

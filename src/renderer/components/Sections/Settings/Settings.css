@@ -1,0 +1,102 @@
+
+.Settings {
+    margin-top: 14px;
+    padding: 47px 47px;
+    /* background-color: #bbbbbb; */
+    font-weight: 600;
+}
+
+.Settings h2 {
+    color: #0e45a1;
+    margin-bottom: 15px;
+    margin-left: 5px;
+}
+
+.Settings hr {
+    margin-bottom: 24px;
+}
+
+/* .Settings_form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+} */
+
+.Settings_form {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    margin-left: -10px;
+}
+
+.Settings_formControl {
+    margin-top: 7px;
+    display: flex;
+}
+.Settings_formControl label {
+   display: inline-block;
+   margin-top: 4px;
+   width: 120px;
+   text-align: end;
+}
+
+.Settings_formActions {
+    margin-top: 12px;
+    display: flex;
+}
+
+.Settings_formActions label {
+    display: inline-block;
+    margin-top: 4px;
+    width: 130px;
+    text-align: end;
+}
+
+.Settings_formControlJobId {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.Settings_jobid {
+    padding-right: 2px;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.Settings_selectInwardBtn {
+    margin-left: 130px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 24px;
+    background-color: #26c281;
+    color: white;
+}
+
+.Settings_selectInwardBtn:hover {
+    background-color: #16b170;
+}
+
+.Settings_productTable {
+    margin-top: 1px;
+}
+
+
+.Settings_bottomForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Settings_bottomForm label {
+    font-weight: 700;
+}
+
+.Settings_bottmFormControl {
+    margin-left: 15px;
+}
+
+.Settings_formDivider {
+    margin-left: 24px;
+}

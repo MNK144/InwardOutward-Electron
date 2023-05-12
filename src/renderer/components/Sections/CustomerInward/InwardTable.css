@@ -1,0 +1,18 @@
+.InwardTable {
+  margin-top: 10px;
+}
+
+.inward_table_empty {
+  display: flex;
+  margin-top: 70px;
+  margin-bottom: 50px;
+  justify-content: center;
+}
+
+.inward_cell_actions {
+    display: flex;
+    width: auto;
+    font-size: 19px;
+    justify-content: space-between;
+    align-items: center;
+}

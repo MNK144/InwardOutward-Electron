@@ -1,0 +1,99 @@
+.InwardAdd {
+    margin-top: 14px;
+    padding: 47px 47px;
+    /* background-color: #bbbbbb; */
+    font-weight: 600;
+}
+
+.InwardAdd h2 {
+    color: #0e45a1;
+    margin-bottom: 15px;
+    margin-left: 5px;
+}
+
+.InwardAdd hr {
+    margin-bottom: 24px;
+}
+
+/* .InwardAdd_form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+} */
+
+.InwardAdd_form {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+}
+
+.InwardAdd_formControl {
+    margin-top: 7px;
+    display: flex;
+}
+.InwardAdd_formControl label {
+   display: inline-block;
+   margin-top: 4px;
+   width: 150px;
+   text-align: end;
+}
+
+.InwardAdd_formActions {
+    margin-top: 12px;
+    display: flex;
+}
+
+.InwardAdd_formActions label {
+    display: inline-block;
+    margin-top: 4px;
+    width: 150px;
+    text-align: end;
+}
+
+.InwardAdd_formControlJobId {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.InwardAdd_jobid {
+    padding-right: 2px;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.InwardAdd_selectCustomerBtn {
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #26c281;
+    color: white;
+}
+
+.InwardAdd_selectCustomerBtn:hover {
+    background-color: #16b170;
+}
+
+.InwardAdd_productTable {
+    margin-top: 1px;
+}
+
+
+.InwardAdd_bottomForm {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.InwardAdd_bottomForm label {
+    font-weight: 700;
+}
+
+.InwardAdd_bottmFormControl {
+    margin-left: 15px;
+}
+
+.InwardAdd_formDivider {
+    margin-left: 22px;
+}

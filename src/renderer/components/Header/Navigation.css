@@ -1,0 +1,36 @@
+.Navigation {
+    user-select: none;
+}
+
+.Navigation a:hover {
+    color: white;
+}
+
+.Navigation ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
+.Link{
+    color: white;
+    text-decoration: none;
+}
+.LinkActive{
+    color: white;
+    text-decoration: none;
+}
+.LinkActive li{
+    background-color: royalblue;
+    color: white;
+}
+
+.Navigation li {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 22px 14px;
+}
+
+.Navigation li:hover {
+    background-color: royalblue;
+}

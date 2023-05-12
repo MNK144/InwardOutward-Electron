@@ -1,0 +1,27 @@
+.Payments {
+    padding: 1px;
+}
+
+.payments_topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.payments_topbar p {
+    margin: 0px;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.payments_topbar_btn {
+    align-self: flex-end;
+}
+
+.payments_topbar_btn_cont_on {
+    visibility: visible;
+}
+.payments_topbar_btn_cont_off {
+    visibility: hidden;
+}

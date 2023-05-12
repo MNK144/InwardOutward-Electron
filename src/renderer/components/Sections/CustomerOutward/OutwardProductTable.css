@@ -1,0 +1,14 @@
+.OutwardProductTable {
+  margin-top: 0px;
+}
+
+.OutwardProductTable_table_empty {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.OutwardProductTable_cell_override {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

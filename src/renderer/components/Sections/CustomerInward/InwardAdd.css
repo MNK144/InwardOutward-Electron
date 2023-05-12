@@ -1,6 +1,6 @@
 .InwardAdd {
     margin-top: 14px;
-    padding: 47px 47px;
+    padding: 40px 40px;
     /* background-color: #bbbbbb; */
     font-weight: 600;
 }
@@ -95,5 +95,5 @@
 }
 
 .InwardAdd_formDivider {
-    margin-left: 22px;
+    margin-left: 0px;
 }

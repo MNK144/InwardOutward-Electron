@@ -10,6 +10,9 @@ const JobService = {
   getAllJobs: async () => {
     return await API.get('/jobs');
   },
+  getSingleJob: async (id) => {
+    return await API.get('/jobs/'+id);
+  },
   createJobData: async (jobData) => {
     return await API.post("/jobs", { jobData });
   },

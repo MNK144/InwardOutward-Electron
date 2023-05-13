@@ -5,6 +5,7 @@ import { FaCheck } from "react-icons/fa";
 import { useEffect } from "react";
 import CustomerService from "../../../services/customer-service";
 import InwardService from "../../../services/inward-service";
+import JobService from "renderer/services/job-service";
 
 const customStyles = {
   headRow: {
@@ -21,6 +22,7 @@ const OutwardSelectTable = ({handleSelect}) => {
   const [isNoData, setIsNoData] = useState(false);
   const [customerData,setCustomerData] = useState([]);
   const [inwardData,setInwardData] = useState([]);
+  const [filteredInwardData, setFilteredInwardData] = useState([]);
 
   useEffect(()=> {
     CustomerService.getAllCustomers().then((res)=>{
@@ -37,9 +39,27 @@ const OutwardSelectTable = ({handleSelect}) => {
     }
   },[customerData])
 
-  useEffect(()=>{
-    if(inwardData.length) setIsNoData(false);
+  const handleInwardFilter  = async () => {
+    if(inwardData.length) {
+      const filtered = [];
+      for(let i=0;i<inwardData.length;i++) {
+        const res = await JobService.getSingleJob(inwardData[i].jobDataID);
+        // console.log("res",res.data);
+        if(!res.data?.outwardID)
+          filtered.push(inwardData[i])
+      }
+      if(filtered.length) {
+        setIsNoData(false);
+      } else {
+        setIsNoData(true);
+      }
+      setFilteredInwardData(filtered)
+    }
     else setIsNoData(true);
+  }
+
+  useEffect(()=>{
+    handleInwardFilter();
   },[inwardData])
 
   // const handleSelect = (id) => {};
@@ -113,7 +133,7 @@ const OutwardSelectTable = ({handleSelect}) => {
       {!isNoData && (
         <DataTable
           columns={columns}
-          data={inwardData}
+          data={filteredInwardData}
           customStyles={customStyles}
         />
       )}

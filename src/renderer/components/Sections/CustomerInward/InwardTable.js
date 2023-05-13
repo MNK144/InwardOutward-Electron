@@ -19,28 +19,28 @@ const DUMMY_DATA = [
     id: 1,
     jobid: "ABC/2022-23/1050",
     customer: "Mark Robert Johnson",
-    totalPrice: "1000",
+    totalCharge: "1000",
     date: "12-02-2020",
   },
   {
     id: 2,
     jobid: "A2",
     customer: "Mike",
-    totalPrice: "5000",
+    totalCharge: "5000",
     date: "14-04-2019",
   },
   {
     id: 3,
     jobid: "A3",
     customer: "John",
-    totalPrice: "500",
+    totalCharge: "500",
     date: "31-10-2022",
   },
   {
     id: 4,
     jobid: "A4",
     customer: "Tom",
-    totalPrice: "1000",
+    totalCharge: "1000",
     date: "11-03-2021",
   },
 ];
@@ -198,11 +198,11 @@ const InwardTable = ({
     },
     {
       name: "Total Price",
-      selector: (row) => "₹" + row.totalPrice,
+      selector: (row) => "₹" + row.totalCharge,
       sortable: true,
       maxWidth: "250px",
       sortFunction: (a, b) => {
-        return parseInt(a.totalPrice) - parseInt(b.totalPrice);
+        return parseInt(a.totalCharge) - parseInt(b.totalCharge);
       },
     },
     {

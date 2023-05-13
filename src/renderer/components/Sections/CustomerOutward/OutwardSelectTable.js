@@ -70,7 +70,7 @@ const OutwardSelectTable = ({handleSelect}) => {
       maxWidth: "80px",
       cell: (row) => {
         return (
-            <div className="OutwardSelectTable_cell_override">₹{row.totalPrice}</div>
+            <div className="OutwardSelectTable_cell_override">₹{row.totalCharge}</div>
         )
       },
     },

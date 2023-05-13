@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../../Misc/Modal";
 import SettingsService from "../../../services/settings-service";
 import PaymentService from "../../../services/payment-service";
+import JobService from "../../../services/job-service";
 
 const inputStyle = { marginLeft: "10px" };
 const inputStyle2 = { marginLeft: "10px", width: "350px" };
@@ -35,16 +36,18 @@ const Outward = () => {
   const [selectCustomer, setSelectCustomer] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isPrintModalActive, setPrintModalActive] = useState(false);
-  const [companyData,setCompanyData] = useState();
+  const [companyData, setCompanyData] = useState();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    SettingsService.getCompanySettings().then(res=>{
-      setCompanyData(res.data);
-    }).catch(err=>{
-      console.log(err);
-    })
+    SettingsService.getCompanySettings()
+      .then((res) => {
+        setCompanyData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const makeOutwardData = () => {
@@ -77,11 +80,17 @@ const Outward = () => {
           paidAmount: "0",
           invoiceDate: outwardData.invoiceDate,
         };
-        PaymentService.createPayment(paymentPayload).then(res=>{
-          console.log("Payment Transaction Created");
-        }).catch(err=>{
-          console.log(err);
-        })
+        PaymentService.createPayment(paymentPayload)
+          .then((res2) => {
+            console.log("Payment Transaction Created");
+            JobService.updateJobData(inwardData.jobDataID, {
+              outwardID: res.data.outwardID,
+              paymentID: res2.data.paymentID,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -149,7 +158,9 @@ const Outward = () => {
           }}
         >
           <div>
-            <h3 style={{textAlign:"center"}}>Outward Created Successfully</h3>
+            <h3 style={{ textAlign: "center" }}>
+              Outward Created Successfully
+            </h3>
             <div
               style={{
                 display: "flex",

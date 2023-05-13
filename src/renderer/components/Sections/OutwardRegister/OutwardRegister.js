@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./OutwardRegister.css";
-import InwardTable from "../CustomerInward/InwardTable";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
 import Card from "../../UI/Card";

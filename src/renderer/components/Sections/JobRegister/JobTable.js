@@ -1,7 +1,7 @@
 import React from "react";
-import "./OutwardTable.css";
+import "./JobTable.css";
 import DataTable from "react-data-table-component";
-import { AiOutlinePrinter } from "react-icons/ai";
+import { RiFileList3Fill } from "react-icons/ri";
 import { useState } from "react";
 import { useEffect } from "react";
 import InwardService from "../../../services/inward-service";
@@ -9,6 +9,7 @@ import CustomerService from "../../../services/customer-service";
 import { useNavigate } from "react-router-dom";
 import OutwardService from "../../../services/outward-service";
 import SettingsService from "../../../services/settings-service";
+import JobService from "../../../services/job-service";
 
 const DUMMY_DATA = [
   {
@@ -38,9 +39,11 @@ const customStyles = {
   },
 };
 
-const OutwardTable = ({ filter }) => {
-  const [companyData,setCompanyData] = useState();
+const JobTable = ({ filter }) => {
+  const [companyData, setCompanyData] = useState();
+  const [jobData, setJobData] = useState([]);
   const [outwardData, setOutwardData] = useState([]);
+  const [inwardData, setInwardData] = useState([]);
   const [customerData, setCustomerData] = useState([]);
   const [isDataChanged, setDataChanged] = useState("");
   const navigate = useNavigate();
@@ -49,17 +52,20 @@ const OutwardTable = ({ filter }) => {
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
-    SettingsService.getCompanySettings().then(res=>{
+    SettingsService.getCompanySettings().then((res) => {
       setCompanyData(res.data);
-    })
+    });
     OutwardService.getAllOutwards().then((res) => {
       setOutwardData(res.data);
     });
-    // InwardService.getAllInwards().then((res) => {
-    //   setOutwardData(res.data);
-    // });
+    InwardService.getAllInwards().then((res) => {
+      setInwardData(res.data);
+    });
     CustomerService.getAllCustomers().then((res) => {
       setCustomerData(res.data);
+    });
+    JobService.getAllJobs().then((res) => {
+      setJobData(res.data);
     });
   }, [isDataChanged]);
 
@@ -78,22 +84,22 @@ const OutwardTable = ({ filter }) => {
   //   },[outwardData,customerData])
 
   const runFilter = () => {
-    let data = outwardData;
+    let data = jobData;
     if (filter.customerID) {
-      data = data.filter((outward) => outward.customerID === filter.customerID);
+      data = data.filter((job) => job.customerID === filter.customerID);
     }
     if (filter.startDate) {
       const startDate = new Date(filter.startDate);
-      data = data.filter((outward) => {
-        const outwardDate = new Date(outward.invoiceDate);
-        return outwardDate >= startDate;
+      data = data.filter((job) => {
+        const inwardDate = new Date(job.inwardDate);
+        return inwardDate >= startDate;
       });
     }
     if (filter.endDate) {
       const endDate = new Date(filter.endDate);
-      data = data.filter((outward) => {
-        const outwardDate = new Date(outward.invoiceDate);
-        return outwardDate <= endDate;
+      data = data.filter((job) => {
+        const inwardDate = new Date(job.inwardDate);
+        return inwardDate <= endDate;
       });
     }
     setFilteredData(data);
@@ -109,15 +115,8 @@ const OutwardTable = ({ filter }) => {
     }
   }, [outwardData, filter]);
 
-  const handlePrint = async (outward) => {
-    // window.open('./CustomerInward/Print','_blank');
-    const customer = customerData.filter(
-      (cust) => cust.id === outward.customerID
-    )[0];
-    const inward = await InwardService.getInward(outward.inwardID);
-    navigate("/CustomerOutward/Print", {
-      state: { companyData: companyData,outwardData: outward, inwardData: inward.data ,customerData: customer },
-    });
+  const handleView = (id) => {
+    //do something
   };
 
   const columns = [
@@ -125,8 +124,8 @@ const OutwardTable = ({ filter }) => {
       name: "Job Id",
       selector: (row) => row.jobID,
       sortable: true,
-      minWidth: "160px",
-      maxWidth: "180px",
+      minWidth: "120px",
+      maxWidth: "140px",
     },
     {
       name: "Customer",
@@ -134,7 +133,7 @@ const OutwardTable = ({ filter }) => {
         const customer = customerData.filter(
           (customer) => customer.id === row.customerID
         );
-        console.log(customer);
+        // console.log(customer);
         if (!customer) return "";
         return customer[0]?.name;
       },
@@ -143,47 +142,68 @@ const OutwardTable = ({ filter }) => {
       maxWidth: "200px",
     },
     {
-      name: "Total Price",
-      selector: (row) => "₹" + row.totalCharge,
-      sortable: true,
-      maxWidth: "140px",
-      sortFunction: (a, b) => {
-        return parseInt(a.totalCharge) - parseInt(b.totalCharge);
-      },
+      name: "Inward Date",
+      selector: (row) => row.inwardDate,
+      minWidth: "135px",
+      maxWidth: "150px",
+      // sortFunction: (a, b) => {
+      //   return new Date(a.invoiceDate) - new Date(b.invoiceDate);
+      // },
     },
     {
       name: "Outward Date",
-      selector: (row) => row.invoiceDate,
-      sortable: true,
+      selector: (row) => {
+        if(!row.outwardID) return "N/A"
+        const outward = outwardData.filter(
+          (outward) => outward.id === row.outwardID
+        );
+        if (!outward) return "";
+        return outward[0]?.invoiceDate;
+      },
       minWidth: "135px",
       maxWidth: "150px",
-      sortFunction: (a, b) => {
-        // const d1 = a.date.substring(6,10)+"-"+a.date.substring(3,5)+"-"+a.date.substring(0,2);
-        // const d2 = b.date.substring(6,10)+"-"+b.date.substring(3,5)+"-"+b.date.substring(0,2);
-        // const d1 =
-        //   a.date.substring(6, 10) +
-        //   "-" +
-        //   a.date.substring(3, 5) +
-        //   "-" +
-        //   a.date.substring(0, 2);
-        // const d2 =
-        //   b.date.substring(6, 10) +
-        //   "-" +
-        //   b.date.substring(3, 5) +
-        //   "-" +
-        //   b.date.substring(0, 2);
-        return new Date(a.invoiceDate) - new Date(b.invoiceDate);
+    },
+    {
+      name: "Inward Total",
+      selector: (row) => {
+        const inward = inwardData.filter(
+          (inward) => inward.id === row.inwardID
+        );
+        if (!inward || !inward[0]) return "";
+        return "₹" + inward[0]?.totalCharge;
       },
+      // sortable: true,
+      maxWidth: "140px",
+      // sortFunction: (a, b) => {
+      //   return parseInt(a.totalCharge) - parseInt(b.totalCharge);
+      // },
     },
     {
-      name: "Job Status",
-      selector: (row) => row.jobStatus,
+      name: "Outward Total",
+      selector: (row) => {
+        if(!row.outwardID) return "N/A"
+        const outward = outwardData.filter(
+          (outward) => outward.id === row.outwardID
+        );
+        if (!outward || !outward[0]) return "";
+        return "₹" + outward[0]?.totalCharge;
+      },
+      // sortable: true,
+      maxWidth: "140px",
+      // sortFunction: (a, b) => {
+      //   return parseInt(a.totalCharge) - parseInt(b.totalCharge);
+      // },
+    },
+    {
+      name: "Received From",
+      selector: (row) => {
+        const inward = inwardData.filter(
+          (inward) => inward.id === row.inwardID
+        );
+        if (!inward || !inward[0]) return "";
+        return inward[0]?.receivedFrom;
+      },
       maxWidth: "150px",
-    },
-    {
-      name: "Remarks",
-      selector: (row) => row.remarks,
-      maxWidth: "250px",
     },
     {
       name: "Actions",
@@ -193,10 +213,10 @@ const OutwardTable = ({ filter }) => {
       maxWidth: "160px",
       cell: (row) => {
         return (
-          <div className="OutwardTable_cell_actions">
-            <AiOutlinePrinter
+          <div className="JobTable_cell_actions">
+            <RiFileList3Fill
               style={{ cursor: "pointer", color: "#2980b9" }}
-              onClick={handlePrint.bind(null, row)}
+              onClick={handleView.bind(null, row)}
             />
           </div>
         );
@@ -205,19 +225,19 @@ const OutwardTable = ({ filter }) => {
   ];
 
   const emptyTableRender = (
-    <div className="OutwardTable_table_empty">
-      <h3>No Outwards Found</h3>
+    <div className="JobTable_table_empty">
+      <h3>No Jobs Found</h3>
     </div>
   );
   return (
-    <div className="OutwardTable">
+    <div className="JobTable">
       <DataTable
         columns={columns}
-        data={isFiltered ? filteredData : outwardData}
+        data={isFiltered ? filteredData : jobData}
         customStyles={customStyles}
       />
     </div>
   );
 };
 
-export default OutwardTable;
+export default JobTable;

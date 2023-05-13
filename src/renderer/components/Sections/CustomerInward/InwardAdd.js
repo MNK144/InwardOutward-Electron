@@ -25,7 +25,7 @@ const InwardAdd = ({
 }) => {
   const [name, setName] = useState("Select a Customer");
   const [customerID, setCustomerID] = useState("");
-  const [jobID, setJobID] = useState("MNK/2022/1");
+  const [jobID, setJobID] = useState("");
   const [receivedFrom, setReceivedFrom] = useState("");
   const [inwardDate, setInwardDate] = useState();
   const [products, setProducts] = useState("");
@@ -44,7 +44,7 @@ const InwardAdd = ({
 
   useEffect(() => {
     //year
-    const year = (new Date()).getFullYear().toString();
+    const year = new Date().getFullYear().toString();
     setJobIDYear(year);
     SettingsService.getCompanySettings().then((res) => {
       console.log(res.data);
@@ -54,17 +54,17 @@ const InwardAdd = ({
 
   useEffect(() => {
     if (jobIDYear && jobIDPrefix) {
-      JobService.getJobCount(jobIDYear).then(res=>{
+      JobService.getJobCount(jobIDYear).then((res) => {
         console.log(res.data);
-        if(res.data.count) {
+        if (res.data.count) {
           const jobID = jobIDPrefix + "/" + jobIDYear + "/" + res.data.count;
           setJobID(jobID);
         } else {
           console.log("Unexpected Error Occured");
         }
-      })
+      });
     }
-  }, [jobIDYear,jobIDPrefix]);
+  }, [jobIDYear, jobIDPrefix]);
 
   useEffect(() => {
     if (editMode) {
@@ -122,7 +122,7 @@ const InwardAdd = ({
       receivedFrom,
       serviceCharge,
       partCharge,
-      totalPrice: parseInt(serviceCharge) + parseInt(partCharge),
+      totalCharge: parseInt(serviceCharge) + parseInt(partCharge),
       isActive: true,
       inwardProducts,
     };
@@ -132,7 +132,18 @@ const InwardAdd = ({
       InwardService.createInward(inwardData)
         .then((res) => {
           console.log(res);
-          if(res.data.status==="Success") {
+          if (res.data.status === "Success") {
+            JobService.createJobData({
+              jobID: jobID,
+              customerID: customerID,
+              inwardID: res.data.inwardID,
+              inwardDate: inwardData.inwardDate,
+            }).then((res2) => {
+              console.log(res2.data);
+              InwardService.editInward(res.data.inwardID, {
+                jobDataID: res2.data.jobID,
+              });
+            });
             JobService.updateJobCount(jobIDYear);
           }
         })

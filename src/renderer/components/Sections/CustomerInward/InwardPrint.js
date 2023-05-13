@@ -38,7 +38,7 @@ const InwardPrint = () => {
     setJobID(inward.jobID);
     setInwardDate(inward.inwardDate);
     setInwardProducts(inward.inwardProducts);
-    setInwardTotal(inward.totalPrice);
+    setInwardTotal(inward.totalCharge);
     setCompanyName(company.companyName);
     setCompanyAddress(company.address);
     setCompanyEmail(company.email);

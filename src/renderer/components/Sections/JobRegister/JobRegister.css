@@ -1,3 +1,85 @@
 .JobRegister {
-    padding: 1px;
+    margin-top: 14px;
+    padding: 31px 31px;
+    /* background-color: #bbbbbb; */
+    font-weight: 600;
+}
+
+.JobRegister_topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.JobRegister_topbar p {
+    margin: 0px;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.JobRegister hr {
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+
+.JobRegister_form {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    margin-left: -10px;
+}
+
+.JobRegister_formControl {
+    margin-top: 7px;
+    display: flex;
+}
+.JobRegister_formControl label {
+   display: inline-block;
+   margin-top: 4px;
+   width: 120px;
+   text-align: end;
+}
+
+.JobRegister_formActions {
+    margin-top: 12px;
+    display: flex;
+}
+
+.JobRegister_formActions label {
+    display: inline-block;
+    margin-top: 4px;
+    width: 150px;
+    text-align: end;
+}
+
+
+.JobRegister_searchBtn {
+    margin-left: 130px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 24px;
+    background-color: #26c281;
+    color: white;
+}
+.JobRegister_clearBtn {
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 24px;
+    background-color: #fe6767;
+    color: white;
+}
+
+.JobRegister_searchBtn:hover {
+    background-color: #16b170;
+}
+.JobRegister_clearBtn:hover {
+    background-color: #f03434;
+}
+
+
+.JobRegister_formDivider {
+    margin-left: 24px;
 }

@@ -89,7 +89,7 @@ const OutwardRegister = () => {
               <Input
                 type="text"
                 style={inputStyle}
-                disabled="true"
+                disabled={true}
                 value={custName}
               />
             </div>

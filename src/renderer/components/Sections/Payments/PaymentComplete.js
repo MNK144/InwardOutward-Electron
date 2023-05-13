@@ -122,7 +122,7 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
             <Input
               type="text"
               style={inputStyle}
-              disabled="true"
+              disabled={true}
               onChange={(event) => {
                 setJobID(event.target.value);
               }}
@@ -134,7 +134,7 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
             <Input
               type="text"
               style={inputStyle}
-              disabled="true"
+              disabled={true}
               value={customerName}
             />
           </div>
@@ -143,7 +143,7 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
             <Input
               type="date"
               style={inputStyle}
-              disabled="true"
+              disabled={true}
               onChange={(event) => {
                 setInvoiceDate(event.target.value);
               }}
@@ -203,7 +203,7 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
                 <Input
                   type="text"
                   style={inputStyle2}
-                  disabled="true"
+                  disabled={true}
                   value={invoiceAmount}
                 />
               </div>
@@ -212,7 +212,7 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
                 <Input
                   type="text"
                   style={inputStyle2}
-                  disabled="true"
+                  disabled={true}
                   value={paidAmount}
                 />
               </div>
@@ -221,7 +221,7 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
                 <Input
                   type="text"
                   style={inputStyle2}
-                  disabled="true"
+                  disabled={true}
                   value={outstanding}
                 />
               </div>

@@ -224,7 +224,7 @@ const Outward = () => {
                 <Input
                   type="text"
                   style={inputStyle}
-                  disabled="true"
+                  disabled={true}
                   value={jobID}
                 />
               </div>
@@ -235,7 +235,7 @@ const Outward = () => {
                 <Input
                   type="text"
                   style={inputStyle2}
-                  disabled="true"
+                  disabled={true}
                   value={custName}
                 />
               </div>
@@ -244,7 +244,7 @@ const Outward = () => {
                 <Input
                   type="text"
                   style={inputStyle2}
-                  disabled="true"
+                  disabled={true}
                   value={inwardDate}
                 />
               </div>

@@ -238,14 +238,14 @@ const PaymentTable = ({
         return (
           <div className="payments_cell_actions">
             <div className="payments_actions_tooltip">
-              <span class="tooltiptext posleft">Transaction History</span>
+              <span className="tooltiptext posleft">Transaction History</span>
               <RiFileList3Fill
                 style={{ cursor: "pointer", color: "#2980b9", margin: "2px" }}
                 onClick={handleViewTransaction.bind(null, row.transactionData)}
               />
             </div>
             <div className="payments_actions_tooltip">
-              <span class="tooltiptext posright">Complete Payment</span>
+              <span className="tooltiptext posright">Complete Payment</span>
               <FaMoneyBill
                 style={{ cursor: "pointer", color: "#00cc44", margin: "2px" }}
                 onClick={handlePaymentComplete.bind(null, row.id)}
@@ -322,14 +322,14 @@ const PaymentTable = ({
         return (
           <div className="payments_cell_actions">
             <div className="payments_actions_tooltip">
-              <span class="tooltiptext posleft">Transaction History</span>
+              <span className="tooltiptext posleft">Transaction History</span>
               <RiFileList3Fill
                 style={{ cursor: "pointer", color: "#2980b9", margin: "2px" }}
                 onClick={handleViewTransaction.bind(null, row.transactionData)}
               />
             </div>
             <div className="payments_actions_tooltip">
-              {/* <span class="tooltiptext posright">Print</span> */}
+              {/* <span className="tooltiptext posright">Print</span> */}
               <AiOutlinePrinter
                 style={{ cursor: "pointer", color: "#2980b9", margin: "2px" }}
                 onClick={handlePrint.bind(null, row)}

@@ -216,7 +216,7 @@ const InwardAdd = ({
               <Input
                 type="text"
                 style={inputStyle}
-                disabled="true"
+                disabled={true}
                 value={name}
               />
             </div>

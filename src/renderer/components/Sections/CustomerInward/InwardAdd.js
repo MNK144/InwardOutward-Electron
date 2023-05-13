@@ -143,17 +143,21 @@ const InwardAdd = ({
               InwardService.editInward(res.data.inwardID, {
                 jobDataID: res2.data.jobID,
               });
-            });
+            }).finally(() => {
+              setInwardAdd(false);
+              toggleAddButton();
+            });;
             JobService.updateJobCount(jobIDYear);
           }
         })
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {
-          setInwardAdd(false);
-          toggleAddButton();
-        });
+        // .finally(() => {
+        //   console.log("Called Finally");
+        //   setInwardAdd(false);
+        //   toggleAddButton();
+        // });
     } else {
       InwardService.editInward(inwardEditId, inwardData)
         .then((res) => {

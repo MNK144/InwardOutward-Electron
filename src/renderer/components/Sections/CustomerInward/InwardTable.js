@@ -13,6 +13,7 @@ import Modal from "../../Misc/Modal";
 import Button from "../../UI/Button";
 import { useNavigate } from "react-router-dom";
 import SettingsService from "../../../services/settings-service";
+import JobService from "renderer/services/job-service";
 
 const DUMMY_DATA = [
   {
@@ -64,6 +65,7 @@ const InwardTable = ({
 }) => {
   const [companyData, setCompanyData] = useState();
   const [inwardData, setInwardData] = useState([]);
+  const [pureInwardData, setPureInwardData] = useState([]);
   const [customerData, setCustomerData] = useState([]);
   const [deleteId, setDeleteId] = useState();
   const [isDeleteModalActive, setDeleteModalActive] = useState(false);
@@ -79,15 +81,39 @@ const InwardTable = ({
     });
     InwardService.getAllInwards().then((res) => {
       setInwardData(res.data);
-      setInwardCount(res.data.length);
+      // setInwardCount(res.data.length);
     });
     CustomerService.getAllCustomers().then((res) => {
       setCustomerData(res.data);
     });
   }, [isDataChanged]);
 
+  const purifyInwards = async () => {
+    if(inwardData.length) {
+      const filtered = [];
+      for(let i=0;i<inwardData.length;i++) {
+        const res = await JobService.getSingleJob(inwardData[i].jobDataID);
+        // console.log("res",res.data);
+        if(!res.data?.outwardID)
+          filtered.push(inwardData[i])
+      }
+      setPureInwardData(filtered)
+      setInwardCount(filtered.length)
+    } else {
+      setPureInwardData([]);
+      setInwardCount(0);
+    }
+  }
+  useEffect(() => {
+    if(isInwardRegister) {
+      setPureInwardData(inwardData);
+    } else {
+      purifyInwards();
+    }
+  },[inwardData]);
+
   const runFilter = () => {
-    let data = inwardData;
+    let data = pureInwardData;
     if (filter.customerID) {
       data = data.filter((inward) => inward.customerID === filter.customerID);
     }
@@ -116,7 +142,7 @@ const InwardTable = ({
       setIsFiltered(true);
       runFilter();
     }
-  }, [inwardData, filter]);
+  }, [pureInwardData, filter]);
 
   const handlePrint = (inward) => {
     // window.open('./CustomerInward/Print','_blank');
@@ -274,10 +300,10 @@ const InwardTable = ({
   );
   return (
     <div className="InwardTable">
-      {inwardData.length > 0 ? (
+      {pureInwardData.length > 0 ? (
         <DataTable
           columns={columns}
-          data={isFiltered ? filteredData : inwardData}
+          data={isFiltered ? filteredData : pureInwardData}
           customStyles={customStyles}
         />
       ) : (

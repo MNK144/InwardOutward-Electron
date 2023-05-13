@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./PaymentPrint.css";
 
 const PaymentPrint = () => {
   const {state} = useLocation();
+  const navigate = useNavigate();
 
   const [companyName, setCompanyName] = useState();
   const [companyAddress, setCompanyAddress] = useState();
@@ -23,7 +24,10 @@ const PaymentPrint = () => {
   const [terms, setTerms] = useState();
 
   useEffect(() => {
-    // setTimeout(() => window.print(), 50);
+    // setTimeout(() => window.print(), 200);
+    // window.onafterprint = function(e){
+    //   navigate("/PaymentRegister");
+    // };
     console.log(state);
     const cust = state.customerData;
     const inward = state.inwardData;
@@ -48,17 +52,20 @@ const PaymentPrint = () => {
 
   return (
     <div id="invoice">
-      {/* <div className="toolbar hidden-print">
+      <div className="toolbar hidden-print">
         <div className="text-right">
-          <button id="printInvoice" className="btn btn-info">
-            <i className="fa fa-print"></i> Print
+          <button className="btn btn-info" onClick={()=>navigate("/PaymentRegister")}>
+            Back
+          </button>
+          <button className="btn btn-info" onClick={()=>window.print()}>
+            Print
           </button>
           <button className="btn btn-info">
-            <i className="fa fa-file-pdf-o"></i> Export as PDF
+            Export as PDF
           </button>
         </div>
         <hr />
-      </div> */}
+      </div>
       <div className="invoice overflow-auto">
         <div style={{ minWidth: "600px" }}>
           <header>

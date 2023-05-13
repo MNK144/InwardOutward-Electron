@@ -178,6 +178,7 @@
     }
 
     .hidden-print {
+        display: none;
         visibility: hidden;
     }
 }

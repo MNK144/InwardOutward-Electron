@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./OutwardPrint.css";
 
 const OutwardPrint = () => {
   const {state} = useLocation();
+  const navigate = useNavigate();
 
   const [companyName, setCompanyName] = useState("Shivam Computers");
   const [companyAddress, setCompanyAddress] = useState(
@@ -28,6 +29,9 @@ const OutwardPrint = () => {
 
   useEffect(() => {
     // setTimeout(() => window.print(), 50);
+    // window.onafterprint = function(e){
+    //   navigate("/CustomerOutward");
+    // };
     console.log(state);
     const cust = state.customerData;
     const inward = state.inwardData;
@@ -66,17 +70,20 @@ const OutwardPrint = () => {
 
   return (
     <div id="invoice">
-      {/* <div className="toolbar hidden-print">
+     <div className="toolbar hidden-print">
         <div className="text-right">
-          <button id="printInvoice" className="btn btn-info">
-            <i className="fa fa-print"></i> Print
+          <button className="btn btn-info" onClick={()=>navigate("/OutwardRegister")}>
+            Back
+          </button>
+          <button className="btn btn-info" onClick={()=>window.print()}>
+            Print
           </button>
           <button className="btn btn-info">
-            <i className="fa fa-file-pdf-o"></i> Export as PDF
+            Export as PDF
           </button>
         </div>
         <hr />
-      </div> */}
+      </div>
       <div className="invoice overflow-auto">
         <div style={{ minWidth: "600px" }}>
           <header>

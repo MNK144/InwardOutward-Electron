@@ -56,6 +56,7 @@ const PaymentTable = ({
 }) => {
   const [companyData, setCompanyData] = useState();
   const [paymentData, setPaymentData] = useState([]);
+  const [purePaymentData, setPurePaymentData] = useState([]);
   const [inwardData, setInwardData] = useState([]);
   const [outwardData, setOutwardData] = useState([]);
   const [customerData, setCustomerData] = useState([]);
@@ -84,8 +85,34 @@ const PaymentTable = ({
     });
   }, [isDataChanged]);
 
+  const purifyPaymentData = () => {
+    if(paymentData.length) {
+      const filtered = [];
+      for(let i=0;i<paymentData.length;i++) {
+        // console.log("PD",parseInt(paymentData[i].outstandingAmount));
+        if(parseInt(paymentData[i].outstandingAmount)>0)
+          filtered.push(paymentData[i]);
+      }
+      setPurePaymentData(filtered)
+      setPaymentCount(filtered.length)
+    } else {
+      setPurePaymentData([]);
+      setPaymentCount(0);
+    }
+  }
+  useEffect(()=>{
+    if(paymentData.length)
+    {
+      if(isPaymentRegister) {
+        setPurePaymentData(paymentData);
+      } else {
+        purifyPaymentData();
+      }
+    }
+  },[paymentData]);
+
   const runFilter = () => {
-    let data = paymentData;
+    let data = purePaymentData;
     if (filter.customerID) {
       data = data.filter((payment) => payment.customerID === filter.customerID);
     }
@@ -114,7 +141,7 @@ const PaymentTable = ({
       setIsFiltered(true);
       runFilter();
     }
-  }, [paymentData, filter]);
+  }, [purePaymentData, filter]);
 
   const handlePrint = async (payment) => {
     const customer = customerData.filter(
@@ -321,10 +348,10 @@ const PaymentTable = ({
   );
   return (
     <div className="PaymentTable">
-      {paymentData.length > 0 ? (
+      {purePaymentData.length > 0 ? (
         <DataTable
           columns={isPaymentRegister ? columnsRegister : columns}
-          data={isFiltered ? filteredData : paymentData}
+          data={isFiltered ? filteredData : purePaymentData}
           customStyles={customStyles}
         />
       ) : (

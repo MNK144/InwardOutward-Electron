@@ -18,11 +18,12 @@ const customStyles = {
   },
 };
 
-const OutwardSelectTable = ({handleSelect}) => {
+const OutwardSelectTable = ({handleSelect, searchTerm}) => {
   const [isNoData, setIsNoData] = useState(false);
   const [customerData,setCustomerData] = useState([]);
   const [inwardData,setInwardData] = useState([]);
   const [filteredInwardData, setFilteredInwardData] = useState([]);
+  const [searchedData, setSearchedData] = useState([]);
 
   useEffect(()=> {
     CustomerService.getAllCustomers().then((res)=>{
@@ -38,6 +39,26 @@ const OutwardSelectTable = ({handleSelect}) => {
         });
     }
   },[customerData])
+  
+  useEffect(()=> {
+    if(searchTerm) {
+       const filtered = [];
+       filteredInwardData.forEach(inward=>{
+        const customer = customerData.filter(data=> data.id===inward.customerID)[0];
+        const customerName = customer?.name;
+        if(inward.jobID.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           customerName.toLowerCase().includes(searchTerm.toLowerCase()) || 
+           inward.totalCharge.toString().includes(searchTerm) ||
+           inward.inwardDate.includes(searchTerm)
+        ) {
+          filtered.push(inward);
+        }
+       });
+      setSearchedData(filtered);
+    } else {
+      setSearchedData(filteredInwardData);
+    }
+  },[searchTerm])
 
   const handleInwardFilter  = async () => {
     if(inwardData.length) {
@@ -54,6 +75,7 @@ const OutwardSelectTable = ({handleSelect}) => {
         setIsNoData(true);
       }
       setFilteredInwardData(filtered)
+      setSearchedData(filtered);
     }
     else setIsNoData(true);
   }
@@ -133,7 +155,7 @@ const OutwardSelectTable = ({handleSelect}) => {
       {!isNoData && (
         <DataTable
           columns={columns}
-          data={filteredInwardData}
+          data={searchedData}
           customStyles={customStyles}
         />
       )}

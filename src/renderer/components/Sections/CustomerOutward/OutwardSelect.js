@@ -10,6 +10,10 @@ import OutwardSelectTable from "./OutwardSelectTable";
 const OutwardSelect = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <Modal className="OutwardSelect_Modal" onClose={props.onClose}>
       <AiOutlineClose
@@ -25,7 +29,7 @@ const OutwardSelect = (props) => {
       />
       <div className="OutwardSelect">
         <h2>Inward List</h2>
-        <form className="OutwardSelect_form">
+        <form className="OutwardSelect_form" onSubmit={handleSubmit}>
           <div className="OutwardSelect_formControl">
             <label htmlFor="search">Search:</label>
             <Input
@@ -50,7 +54,7 @@ const OutwardSelect = (props) => {
         </form>
         {/* <hr style={{ width:"100%"}}/> */}
         <div className="OutwardSelect_tableDiv">
-            <OutwardSelectTable handleSelect={props.handleSelect}/>
+            <OutwardSelectTable handleSelect={props.handleSelect} searchTerm={searchTerm}/>
         </div>
       </div>
     </Modal>

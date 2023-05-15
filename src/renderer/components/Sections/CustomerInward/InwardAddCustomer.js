@@ -10,6 +10,10 @@ import InwardAddCustomerTable from "./InwardAddCustomerTable";
 const InwardAddCustomer = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <Modal className="InwardAddCustomer_Modal" onClose={props.onClose}>
       <AiOutlineClose
@@ -25,7 +29,7 @@ const InwardAddCustomer = (props) => {
       />
       <div className="InwardAddCustomer">
         <h2>Customer List</h2>
-        <form className="InwardAddCustomer_form">
+        <form className="InwardAddCustomer_form" onSubmit={handleSubmit}>
           <div className="InwardAddCustomer_formControl">
             <label htmlFor="search">Search:</label>
             <Input
@@ -50,7 +54,7 @@ const InwardAddCustomer = (props) => {
         </form>
         {/* <hr style={{ width:"100%"}}/> */}
         <div className="InwardAddCustomer_tableDiv">
-            <InwardAddCustomerTable handleSelect={props.handleSelect}/>
+            <InwardAddCustomerTable handleSelect={props.handleSelect} searchTerm={searchTerm}/>
         </div>
       </div>
     </Modal>

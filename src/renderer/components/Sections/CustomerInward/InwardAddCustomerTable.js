@@ -43,21 +43,39 @@ const customStyles = {
   },
 };
 
-const InwardAddCustomerTable = ({handleSelect}) => {
+const InwardAddCustomerTable = ({handleSelect, searchTerm}) => {
   const [isNoData, setIsNoData] = useState(false);
   const [customerData,setCustomerData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(()=> {
     CustomerService.getAllCustomers().then((res)=>{
         console.log(res.data);
         setCustomerData(res.data);
+        setFilteredData(res.data);
     });
   },[])
 
   useEffect(()=> {
-    if(customerData.length) setIsNoData(false);
+    if(filteredData.length) setIsNoData(false);
     else setIsNoData(true);
-  },[customerData])
+  },[filteredData])
+
+  useEffect(()=>{
+    if(searchTerm) {
+      const filtered = [];
+      customerData.forEach(customer=>{
+        if(customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           customer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           customer.phone.toLowerCase().includes(searchTerm.toLowerCase())) {
+         filtered.push(customer);
+        }
+      });
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(customerData);
+    }
+  },[searchTerm])
 
   // const handleSelect = (id) => {};
 
@@ -107,7 +125,7 @@ const InwardAddCustomerTable = ({handleSelect}) => {
 
   const emptyTableRender = (
     <div className="inwardAddCustomer_table_empty">
-      <h3>No Customers Added yet</h3>
+      <h3>No Customers Found</h3>
     </div>
   );
   return (
@@ -116,7 +134,7 @@ const InwardAddCustomerTable = ({handleSelect}) => {
       {!isNoData && (
         <DataTable
           columns={columns}
-          data={customerData}
+          data={filteredData}
           customStyles={customStyles}
         />
       )}

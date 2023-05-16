@@ -6,6 +6,9 @@ import TableItem from "./TableItem";
 import Modal from "../../Misc/Modal";
 import Button from "../../UI/Button";
 import CustomerService from "../../../services/customer-service";
+import DataTable from "react-data-table-component";
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 // const DUMMY_CUSTOMERS = [
 //   {
@@ -38,6 +41,17 @@ import CustomerService from "../../../services/customer-service";
 //     email: "patel.manank144@gmail.com",
 //   },
 // ];
+
+const customStyles = {
+  headRow: {
+    style: {
+      fontWeight: 900,
+      fontSize: "14px",
+      color: "#ffffff",
+      background: "#2980b9",
+    },
+  },
+};
 
 const CustomerTable = ({ setCustomerCount, handleEdit }) => {
   const [customerData, setCustomerData] = useState([]);
@@ -91,51 +105,93 @@ const CustomerTable = ({ setCustomerCount, handleEdit }) => {
     </div>
   );
 
+  const columns = [
+    {
+      name: "Name",
+      selector: (row) => row.name,
+      sortable: true,
+      minWidth: "160px",
+      maxWidth: "210px",
+    },
+    {
+      name: "Address",
+      selector: (row) => row.address,
+      sortable: true,
+      minWidth: "180px",
+    },
+    {
+      name: "Phone",
+      selector: (row) => row.phone,
+      maxWidth: "250px",
+    },
+    {
+      name: "Email",
+      selector: (row) => row.email,
+      sortable: true,
+      minWidth: "135px",
+      maxWidth: "250px",
+    },
+    {
+      name: "Actions",
+      center: true,
+      compact: true,
+      minWidth: "120px",
+      maxWidth: "160px",
+      cell: (row) => {
+        return (
+          <div className="inward_cell_actions">
+            <FiEdit
+              style={{ cursor: "pointer", color: "#2980b9", margin: "2px" }}
+              onClick={handleEdit.bind(null, row.id)}
+            />
+            <RiDeleteBinLine
+              style={{ cursor: "pointer", color: "#ee4744", margin: "2px" }}
+              onClick={()=>handleDelete(row.id)}
+            />
+          </div>
+        );
+      },
+    },
+  ];
+
   return (
     <div className="CustomerTable">
-      {/* <table classNameName='CustomerTable_table'>
-            <tr>
-                <th>Test</th>
-                <th>Test</th>
-                <th>Test</th>
-            </tr>
-            <tr>0
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
-            </tr>
-        </table> */}
       {!customerData.length ? (
         emptyTableRender
       ) : (
-        <div className="cst_table">
-          <div className="cst_row cst_header">
-            <div className="cst_cell">ID</div>
-            <div className="cst_cell">Name</div>
-            <div className="cst_cell">Address</div>
-            <div className="cst_cell">Phone</div>
-            <div className="cst_cell">Email</div>
-            <div className="cst_cell" style={{ textAlign: "center" }}>
-              Actions
-            </div>
-            {/* <div className="cst_cell">Edit</div>
-          <div className="cst_cell">Delete</div> */}
-          </div>
+        // <div className="cst_table">
+        //   <div className="cst_row cst_header">
+        //     <div className="cst_cell">ID</div>
+        //     <div className="cst_cell">Name</div>
+        //     <div className="cst_cell">Address</div>
+        //     <div className="cst_cell">Phone</div>
+        //     <div className="cst_cell">Email</div>
+        //     <div className="cst_cell" style={{ textAlign: "center" }}>
+        //       Actions
+        //     </div>
+        //     {/* <div className="cst_cell">Edit</div>
+        //   <div className="cst_cell">Delete</div> */}
+        //   </div>
 
-          {/* {DUMMY_CUSTOMERS.map((item) => (
-          <TableItem key={item.id} item={item} />
-        ))} */}
-          {customerData.map((item) => (
-            <TableItem
-              key={item.id}
-              item={item}
-              customerData={customerData}
-              setCustomerData={setCustomerData}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
-          ))}
-        </div>
+        //   {/* {DUMMY_CUSTOMERS.map((item) => (
+        //   <TableItem key={item.id} item={item} />
+        // ))} */}
+        //   {customerData.map((item) => (
+        //     <TableItem
+        //       key={item.id}
+        //       item={item}
+        //       customerData={customerData}
+        //       setCustomerData={setCustomerData}
+        //       handleEdit={handleEdit}
+        //       handleDelete={handleDelete}
+        //     />
+        //   ))}
+        // </div>
+        <DataTable
+          columns={columns}
+          data={customerData}
+          customStyles={customStyles}
+        />
       )}
       {isDeleteModalActive && (
         <Modal

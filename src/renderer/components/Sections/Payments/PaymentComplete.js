@@ -15,6 +15,9 @@ import PaymentService from "../../../services/payment-service";
 const inputStyle = { marginLeft: "10px", width: "200px" };
 const inputStyle2 = { marginLeft: "10px", width: "180px", paddingLeft: "12px" };
 const inputStyle3 = { marginLeft: "10px" };
+const inputStyleError = { marginLeft: "10px", width: "200px", border: "2px solid #e60000" };
+const inputStyle2Error = { marginLeft: "10px", width: "180px", paddingLeft: "12px", border: "2px solid #e60000" };
+const inputStyle3Error = { marginLeft: "10px", border: "2px solid #e60000" };
 
 const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
   const [jobID, setJobID] = useState("");
@@ -22,13 +25,17 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
   const [invoiceDate, setInvoiceDate] = useState();
 
   const [paymentDate, setPaymentDate] = useState();
-  const [paymentMode, setPaymentMode] = useState();
+  const [paymentMode, setPaymentMode] = useState("default");
   const [remarks, setRemarks] = useState("");
 
   const [invoiceAmount, setInvoiceAmount] = useState();
   const [paidAmount, setPaidAmount] = useState();
   const [outstanding, setOutstanding] = useState();
   const [entryAmount, setEntryAmount] = useState("");
+
+  const [paymentDateError, setPaymentDateError] = useState(null);
+  const [paymentModeError, setPaymentModeError] = useState(null);
+  const [entryAmountError, setEntryAmountError] = useState(null);
 
   const [paymentData, setPaymentData] = useState();
   const [outwardData, setOutwardData] = useState([]);
@@ -67,6 +74,15 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    //Validation
+    if(paymentMode==="default" || !paymentDate || !entryAmount) {
+      if(paymentMode==="default") setPaymentModeError(true);
+      if(!paymentDate) setPaymentDateError(true);
+      if(!entryAmount) setEntryAmountError(true);
+      return;
+    }
+
     const transactionData = {
       paymentDate,
       paymentMode,
@@ -163,9 +179,11 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
                 <label htmlFor="name">Payment Date:</label>
                 <Input
                   type="date"
-                  style={inputStyle}
+                  style={(paymentDateError!==null && paymentDateError===true) ? inputStyleError : inputStyle}
                   onChange={(event) => {
                     setPaymentDate(event.target.value);
+                    if(event.target.value) setPaymentDateError(false);
+                    else setPaymentDateError(true);
                   }}
                   value={paymentDate}
                 />
@@ -173,9 +191,11 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
               <div className="InwardAdd_formControl">
                 <label htmlFor="receivedfrom">Mode of Payment:</label>
                 <Select
-                  style={inputStyle3}
+                  style={(paymentModeError!==null && paymentModeError===true) ? inputStyle3Error : inputStyle3}
                   onChange={(event) => {
                     setPaymentMode(event.target.value);
+                    if(event.target.value !== "default") setPaymentModeError(false);
+                    else setPaymentModeError(true);
                   }}
                 >
                   <option value="default">Select Mode</option>
@@ -229,9 +249,11 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
                 <label htmlFor="receivedfrom">Enter Amount:</label>
                 <Input
                   type="text"
-                  style={inputStyle2}
+                  style={(entryAmountError!==null && entryAmountError===true) ? inputStyle2Error : inputStyle2}
                   onChange={(event) => {
                     setEntryAmount(event.target.value);
+                    if(event.target.value) setEntryAmountError(false);
+                    else setEntryAmountError(true);
                   }}
                   value={entryAmount}
                 />

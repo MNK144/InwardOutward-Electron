@@ -14,7 +14,11 @@ import SettingsService from "../../../services/settings-service";
 import JobService from "../../../services/job-service";
 
 const inputStyle = { marginLeft: "10px" };
+const inputStyleError = { marginLeft: "10px", border: "2px solid #e60000" };
 const inputStyle2 = { marginLeft: "10px", width: "380px" };
+const inputStyle2Error = { marginLeft: "10px", width: "380px", border: "2px solid #e60000" };
+const inputStyle3 = { marginLeft: "3px", width: "120px" };
+const inputStyle3Error = { marginLeft: "3px", width: "120px", border: "2px solid #e60000" };
 
 const InwardAdd = ({
   editMode,
@@ -34,6 +38,14 @@ const InwardAdd = ({
   const [remarks, setRemarks] = useState("");
   const [serviceCharge, setServiceCharge] = useState("");
   const [partCharge, setPartCharge] = useState("");
+
+  const [productsError, setProductsError] = useState(null);
+  const [serialNoError, setSerialNoError] = useState(null);
+  const [problemError, setProblemError] = useState(null);
+  const [receivedFromError, setReceivedFromError] = useState(null);
+  const [inwardDateError, setInwardDateError] = useState(null);
+  const [serviceChargeError, setServiceChargeError] = useState(null);
+  const [partChargeError, setPartChargeError] = useState(null);
 
   const [inwardProducts, setInwardProducts] = useState([]);
   const [selectCustomer, setSelectCustomer] = useState(false);
@@ -96,6 +108,15 @@ const InwardAdd = ({
 
   const handleSubmitAdd = (event) => {
     event.preventDefault();
+
+    //Validations
+    if(!products || !serialNo || !problem) {
+      if(!products) setProductsError(true);
+      if(!serialNo) setSerialNoError(true);
+      if(!problem) setProblemError(true);
+      return;
+    }
+
     const product = {
       id: uuid(),
       products,
@@ -108,6 +129,9 @@ const InwardAdd = ({
     setSerialNo("");
     setProblem("");
     setRemarks("");
+    setProductsError(null);
+    setSerialNoError(null);
+    setProblemError(null);
   };
   const handleProductDelete = (id) => {
     setInwardProducts((prev) => prev.filter((product) => product.id !== id));
@@ -115,6 +139,16 @@ const InwardAdd = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    //Validation
+    if(!receivedFrom || !inwardDate || !serviceCharge || !partCharge) {
+      if(!receivedFrom) setReceivedFromError(true);
+      if(!inwardDate) setInwardDateError(true);
+      if(!serviceCharge) setServiceChargeError(true);
+      if(!partCharge) setPartChargeError(true);
+      return;
+    }
+
     const inwardData = {
       jobID,
       customerID,
@@ -224,10 +258,12 @@ const InwardAdd = ({
               <label htmlFor="receivedfrom">Received From:</label>
               <Input
                 type="text"
-                style={inputStyle}
+                style={(receivedFromError!==null && receivedFromError===true) ? inputStyleError : inputStyle}
                 disabled={!customerID}
                 onChange={(event) => {
                   setReceivedFrom(event.target.value);
+                  if(event.target.value) setReceivedFromError(false);
+                  else setReceivedFromError(true);
                 }}
                 value={receivedFrom}
               />
@@ -236,10 +272,12 @@ const InwardAdd = ({
               <label htmlFor="inwardDate">Inward Date:</label>
               <Input
                 type="date"
-                style={inputStyle}
+                style={(inwardDateError!==null && inwardDateError===true) ? inputStyleError : inputStyle}
                 disabled={!customerID}
                 onChange={(event) => {
                   setInwardDate(event.target.value);
+                  if(event.target.value) setInwardDateError(false);
+                  else setInwardDateError(true);
                 }}
                 value={inwardDate}
               />
@@ -250,10 +288,12 @@ const InwardAdd = ({
               <label htmlFor="products">Products:</label>
               <Input
                 type="text"
-                style={inputStyle2}
+                style={(productsError!==null && productsError===true) ? inputStyle2Error : inputStyle2}
                 disabled={!customerID}
                 onChange={(event) => {
                   setProducts(event.target.value);
+                  if(event.target.value) setProductsError(false);
+                  else setProductsError(true);
                 }}
                 value={products}
               />
@@ -262,10 +302,12 @@ const InwardAdd = ({
               <label htmlFor="receivedfrom">Serial No:</label>
               <Input
                 type="text"
-                style={inputStyle2}
+                style={(serialNoError!==null && serialNoError===true) ? inputStyle2Error : inputStyle2}
                 disabled={!customerID}
                 onChange={(event) => {
                   setSerialNo(event.target.value);
+                  if(event.target.value) setSerialNoError(false);
+                  else setSerialNoError(true);
                 }}
                 value={serialNo}
               />
@@ -274,10 +316,12 @@ const InwardAdd = ({
               <label htmlFor="receivedfrom">Problem:</label>
               <Input
                 type="text"
-                style={inputStyle2}
+                style={(problemError!==null && problemError===true) ? inputStyle2Error : inputStyle2}
                 disabled={!customerID}
                 onChange={(event) => {
                   setProblem(event.target.value);
+                  if(event.target.value) setProblemError(false);
+                  else setProblemError(true);
                 }}
                 value={problem}
               />
@@ -325,10 +369,12 @@ const InwardAdd = ({
               <label htmlFor="serviceCharge">Service Charge&nbsp; ₹</label>
               <Input
                 type="number"
-                style={{ marginLeft: "3px", width: "120px" }}
+                style={(serviceChargeError!==null && serviceChargeError===true) ? inputStyle3Error : inputStyle3}
                 disabled={!customerID}
                 onChange={(event) => {
                   setServiceCharge(event.target.value);
+                  if(event.target.value) setServiceChargeError(false);
+                  else setServiceChargeError(true);
                 }}
                 value={serviceCharge}
               />
@@ -337,10 +383,12 @@ const InwardAdd = ({
               <label htmlFor="partCharge">Part Charge&nbsp; ₹</label>
               <Input
                 type="number"
-                style={{ marginLeft: "3px", width: "120px" }}
+                style={(partChargeError!==null && partChargeError===true) ? inputStyle3Error : inputStyle3}
                 disabled={!customerID}
                 onChange={(event) => {
                   setPartCharge(event.target.value);
+                  if(event.target.value) setPartChargeError(false);
+                  else setPartChargeError(true);
                 }}
                 value={partCharge}
               />

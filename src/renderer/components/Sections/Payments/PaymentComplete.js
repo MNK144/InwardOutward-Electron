@@ -36,6 +36,7 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
   const [paymentDateError, setPaymentDateError] = useState(null);
   const [paymentModeError, setPaymentModeError] = useState(null);
   const [entryAmountError, setEntryAmountError] = useState(null);
+  const [outstandingError, setOutstandingError] = useState(null);
 
   const [paymentData, setPaymentData] = useState();
   const [outwardData, setOutwardData] = useState([]);
@@ -80,6 +81,10 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
       if(paymentMode==="default") setPaymentModeError(true);
       if(!paymentDate) setPaymentDateError(true);
       if(!entryAmount) setEntryAmountError(true);
+      return;
+    }
+    else if(parseInt(entryAmount)>parseInt(outstanding.substring(1))) {
+      setOutstandingError(true);
       return;
     }
 
@@ -240,7 +245,7 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
                 <label htmlFor="receivedfrom">Outstanding:</label>
                 <Input
                   type="text"
-                  style={inputStyle2}
+                  style={(outstandingError!==null && outstandingError===true) ? inputStyle2Error : inputStyle2}
                   disabled={true}
                   value={outstanding}
                 />
@@ -254,6 +259,7 @@ const PaymentComplete = ({ paymentCompleteID, setPaymentCompleteUI }) => {
                     setEntryAmount(event.target.value);
                     if(event.target.value) setEntryAmountError(false);
                     else setEntryAmountError(true);
+                    setOutstandingError(false);
                   }}
                   value={entryAmount}
                 />

@@ -18,7 +18,9 @@ import PaymentService from "../../../services/payment-service";
 import JobService from "../../../services/job-service";
 
 const inputStyle = { marginLeft: "10px" };
+const inputStyleError = { marginLeft: "10px", border: "2px solid #e60000"};
 const inputStyle2 = { marginLeft: "10px", width: "350px" };
+const inputStyle2Error = { marginLeft: "10px", width: "350px", border: "2px solid #e60000"};
 
 const Outward = () => {
   const [jobID, setJobID] = useState("Select an Inward"); //disabled fields
@@ -37,6 +39,11 @@ const Outward = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPrintModalActive, setPrintModalActive] = useState(false);
   const [companyData, setCompanyData] = useState();
+
+  const [invoiceDateError, setInvoiceDateError] = useState(null);
+  const [jobStatusError, setJobStatusError] = useState(null);
+  const [serviceChargeError, setServiceChargeError] = useState(null);
+  const [partChargeError, setPartChargeError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -65,6 +72,16 @@ const Outward = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    //Validation
+    if(!invoiceDate || !jobStatus || !serviceCharge || !partCharge){
+      if(!invoiceDate) setInvoiceDateError(true);
+      if(!jobStatus) setJobStatusError(true);
+      if(!serviceCharge) setServiceChargeError(true);
+      if(!partCharge) setPartChargeError(true);
+      return;
+    }
+
     if (!inwardData) return;
     const outwardData = makeOutwardData();
     console.log(outwardData);
@@ -123,6 +140,10 @@ const Outward = () => {
     setTotalCharge(0);
     setInwardData({});
     setInwardProducts([]);
+    setInvoiceDateError(null);
+    setJobStatusError(null);
+    setServiceChargeError(null);
+    setPartChargeError(null);
   };
 
   const handleInwardModalClose = () => {
@@ -145,6 +166,10 @@ const Outward = () => {
     setServiceCharge(inward.serviceCharge);
     setPartCharge(inward.partCharge);
     setInwardProducts(inward.inwardProducts);
+    setInvoiceDateError(null);
+    setJobStatusError(null);
+    setServiceChargeError(null);
+    setPartChargeError(null);
     handleInwardModalClose();
   };
 
@@ -259,10 +284,12 @@ const Outward = () => {
                 <label htmlFor="inwardDate">Invoice Date:</label>
                 <Input
                   type="date"
-                  style={inputStyle}
+                  style={(invoiceDateError!==null && invoiceDateError===true) ? inputStyleError : inputStyle}
                   disabled={!inwardData}
                   onChange={(event) => {
                     setInvoiceDate(event.target.value);
+                    if(event.target.value) setInvoiceDateError(false);
+                    else setInvoiceDateError(true);
                   }}
                   value={invoiceDate}
                 />
@@ -271,10 +298,12 @@ const Outward = () => {
                 <label htmlFor="receivedfrom">Job Status:</label>
                 <Input
                   type="text"
-                  style={inputStyle}
+                  style={(jobStatusError!==null && jobStatusError===true) ? inputStyleError : inputStyle}
                   disabled={!inwardData}
                   onChange={(event) => {
                     setJobStatus(event.target.value);
+                    if(event.target.value) setJobStatusError(false);
+                    else setJobStatusError(true);
                   }}
                   value={jobStatus}
                 />
@@ -297,10 +326,12 @@ const Outward = () => {
                 <label htmlFor="products">Service Charge ₹:</label>
                 <Input
                   type="text"
-                  style={inputStyle2}
+                  style={(serviceChargeError!==null && serviceChargeError===true) ? inputStyle2Error : inputStyle2}
                   disabled={!inwardData}
                   onChange={(event) => {
                     setServiceCharge(event.target.value);
+                    if(event.target.value) setServiceChargeError(false);
+                    else setServiceChargeError(true);
                   }}
                   value={serviceCharge}
                 />
@@ -309,10 +340,12 @@ const Outward = () => {
                 <label htmlFor="receivedfrom">Part Charge ₹:</label>
                 <Input
                   type="text"
-                  style={inputStyle2}
+                  style={(partChargeError!==null && partChargeError===true) ? inputStyle2Error : inputStyle2}
                   disabled={!inwardData}
                   onChange={(event) => {
                     setPartCharge(event.target.value);
+                    if(event.target.value) setPartChargeError(false);
+                    else setPartChargeError(true);
                   }}
                   value={partCharge}
                 />

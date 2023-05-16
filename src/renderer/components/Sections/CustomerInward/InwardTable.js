@@ -154,6 +154,7 @@ const InwardTable = ({
         companyData: companyData,
         inwardData: inward,
         customerData: customer,
+        isInwardRegister: isInwardRegister,
       },
     });
   };

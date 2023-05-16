@@ -113,7 +113,13 @@ const InwardPrint = () => {
     <div id="invoice">
       <div className="toolbar hidden-print">
         <div className="text-right">
-          <button className="btn btn-info" onClick={()=>navigate("/CustomerInward")}>
+          <button className="btn btn-info" onClick={()=>{
+            if(state.isInwardRegister) {
+              navigate("/InwardRegister")
+            } else {
+              navigate("/CustomerInward")
+            }
+          }}>
             Back
           </button>
           <button className="btn btn-info" onClick={()=>window.print()}>

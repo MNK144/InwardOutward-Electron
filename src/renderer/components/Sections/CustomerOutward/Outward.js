@@ -155,6 +155,7 @@ const Outward = () => {
           onClose={() => {
             setPrintModalActive(false);
             resetFields();
+            navigate("/OutwardRegister");
           }}
         >
           <div>
@@ -187,6 +188,7 @@ const Outward = () => {
                 }}
                 onClick={() => {
                   setPrintModalActive(false);
+                  navigate("/OutwardRegister");
                 }}
               >
                 &nbsp;Close&nbsp;

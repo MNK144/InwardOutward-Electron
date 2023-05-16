@@ -9,12 +9,17 @@ import { useEffect } from "react";
 import CustomerService from "../../../services/customer-service";
 
 const inputStyle = { marginLeft: "10px" };
+const inputStyleError = { marginLeft: "10px", border: "2px solid #e60000" };
 
 const CustomerEdit = ({ customerId, setCustomerEdit, toggleAddButton }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [nameError, setNameError] = useState(null);
+  const [addressError, setAddressError] = useState(null);
+  const [phoneError, setPhoneError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
 
   console.log("Editing Customer: " + customerId);
 
@@ -34,13 +39,24 @@ const CustomerEdit = ({ customerId, setCustomerEdit, toggleAddButton }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const company = "noCompany";
+    // const company = "noCompany";
+
+    //Validations
+    if(!name || !address || !phone || !email) {
+      if(!name) setNameError(true);
+      if(!address) setAddressError(true);
+      if(!phone) setPhoneError(true);
+      if(!email) setEmailError(true);
+      // if(!company) setCompanyError(true);
+      return;
+    }
+
     const customerData = {
       name,
       address,
       phone,
       email,
-      company,
+      // company,
     };
     console.log(customerData);
     CustomerService.editCustomer(customerId, customerData)
@@ -75,9 +91,11 @@ const CustomerEdit = ({ customerId, setCustomerEdit, toggleAddButton }) => {
             <label htmlFor="name">Customer Name:</label>
             <Input
               type="text"
-              style={inputStyle}
+              style={(nameError!==null && nameError===true) ? inputStyleError : inputStyle}
               onChange={(event) => {
                 setName(event.target.value);
+                if(event.target.value) setNameError(false);
+                else setNameError(true);
               }}
               value={name}
             />
@@ -85,9 +103,11 @@ const CustomerEdit = ({ customerId, setCustomerEdit, toggleAddButton }) => {
           <div className="custAdd_formControl">
             <label htmlFor="address">Address:</label>
             <TextArea
-              style={inputStyle}
+              style={(addressError!==null && addressError===true) ? inputStyleError : inputStyle}
               onChange={(event) => {
                 setAddress(event.target.value);
+                if(event.target.value) setAddressError(false);
+                else setAddressError(true);
               }}
               value={address}
             />
@@ -96,9 +116,11 @@ const CustomerEdit = ({ customerId, setCustomerEdit, toggleAddButton }) => {
             <label htmlFor="phone">Phone No:</label>
             <Input
               type="number"
-              style={inputStyle}
+              style={(phoneError!==null && phoneError===true) ? inputStyleError : inputStyle}
               onChange={(event) => {
                 setPhone(event.target.value);
+                if(event.target.value) setPhoneError(false);
+                else setPhoneError(true);
               }}
               value={phone}
             />
@@ -107,9 +129,11 @@ const CustomerEdit = ({ customerId, setCustomerEdit, toggleAddButton }) => {
             <label htmlFor="email">Email:</label>
             <Input
               type="email"
-              style={inputStyle}
+              style={(emailError!==null && emailError===true) ? inputStyleError : inputStyle}
               onChange={(event) => {
                 setEmail(event.target.value);
+                if(event.target.value) setEmailError(false);
+                else setEmailError(true);
               }}
               value={email}
             />

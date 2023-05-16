@@ -7,23 +7,40 @@ import TextArea from "../../UI/TextArea";
 import "./CustomerAdd.css";
 import CustomerService from "../../../services/customer-service";
 
-const inputStyle = { marginLeft: "10px" };
+const inputStyle = { marginLeft: "10px"};
+const inputStyleError = { marginLeft: "10px", border: "2px solid #e60000" };
 
 const CustomerAdd = ({ setCustomerAdd, toggleAddButton }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [company,setCompany] = useState("");
+  // const [company,setCompany] = useState("");
+  const [nameError, setNameError] = useState(null);
+  const [addressError, setAddressError] = useState(null);
+  const [phoneError, setPhoneError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  // const [companyError, setCompanyError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    //Validations
+    if(!name || !address || !phone || !email) {
+      if(!name) setNameError(true);
+      if(!address) setAddressError(true);
+      if(!phone) setPhoneError(true);
+      if(!email) setEmailError(true);
+      // if(!company) setCompanyError(true);
+      return;
+    }
+      
     const customerData = {
       name,
       address,
       phone,
       email,
-      company,
+      // company,
     };
     console.log(customerData);
     CustomerService.createCustomer(customerData)
@@ -41,7 +58,12 @@ const CustomerAdd = ({ setCustomerAdd, toggleAddButton }) => {
     setAddress("");
     setPhone("");
     setEmail("");
-    setCompany("");
+    // setCompany("");
+    setNameError(null);
+    setAddressError(null);
+    setPhoneError(null);
+    setEmailError(null);
+    // setCompanyError(null);
   };
 
   return (
@@ -53,9 +75,11 @@ const CustomerAdd = ({ setCustomerAdd, toggleAddButton }) => {
             <label htmlFor="name">Customer Name:</label>
             <Input
               type="text"
-              style={inputStyle}
+              style={(nameError!==null && nameError===true) ? inputStyleError : inputStyle}
               onChange={(event) => {
                 setName(event.target.value);
+                if(event.target.value) setNameError(false);
+                else setNameError(true);
               }}
               value={name}
             />
@@ -63,9 +87,11 @@ const CustomerAdd = ({ setCustomerAdd, toggleAddButton }) => {
           <div className="custAdd_formControl">
             <label htmlFor="address">Address:</label>
             <TextArea
-              style={inputStyle}
+              style={(addressError!==null && addressError===true) ? inputStyleError : inputStyle}
               onChange={(event) => {
                 setAddress(event.target.value);
+                if(event.target.value) setAddressError(false);
+                else setAddressError(true);
               }}
               value={address}
             />
@@ -74,9 +100,11 @@ const CustomerAdd = ({ setCustomerAdd, toggleAddButton }) => {
             <label htmlFor="phone">Phone No:</label>
             <Input
               type="number"
-              style={inputStyle}
+              style={(phoneError!==null && phoneError===true) ? inputStyleError : inputStyle}
               onChange={(event) => {
                 setPhone(event.target.value);
+                if(event.target.value) setPhoneError(false);
+                else setPhoneError(true);
               }}
               value={phone}
             />
@@ -85,24 +113,28 @@ const CustomerAdd = ({ setCustomerAdd, toggleAddButton }) => {
             <label htmlFor="email">Email:</label>
             <Input
               type="email"
-              style={inputStyle}
+              style={(emailError!==null && emailError===true) ? inputStyleError : inputStyle}
               onChange={(event) => {
                 setEmail(event.target.value);
+                if(event.target.value) setEmailError(false);
+                else setEmailError(true);
               }}
               value={email}
             />
           </div>
-          <div className="custAdd_formControl">
+          {/* <div className="custAdd_formControl">
             <label htmlFor="company">Company:</label>
             <Input
               type="text"
-              style={inputStyle}
+              style={(companyError!==null && companyError===true) ? inputStyleError : inputStyle}
               onChange={(event) => {
                 setCompany(event.target.value);
+                if(event.target.value) setCompanyError(false);
+                else setCompanyError(true);
               }}
               value={company}
             />
-          </div>
+          </div> */}
           <div className="custAdd_formActions">
             <Button style={{fontWeight: "600"}}>Submit</Button>&nbsp;&nbsp;
             <Button style={{fontWeight: "600"}} type="button" onClick={handleReset}>

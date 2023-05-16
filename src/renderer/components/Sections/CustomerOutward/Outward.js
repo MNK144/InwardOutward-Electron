@@ -258,6 +258,7 @@ const Outward = () => {
                 <Input
                   type="date"
                   style={inputStyle}
+                  disabled={!inwardData}
                   onChange={(event) => {
                     setInvoiceDate(event.target.value);
                   }}
@@ -269,6 +270,7 @@ const Outward = () => {
                 <Input
                   type="text"
                   style={inputStyle}
+                  disabled={!inwardData}
                   onChange={(event) => {
                     setJobStatus(event.target.value);
                   }}
@@ -280,6 +282,7 @@ const Outward = () => {
                 <Input
                   type="text"
                   style={inputStyle}
+                  disabled={!inwardData}
                   onChange={(event) => {
                     setRemarks(event.target.value);
                   }}
@@ -293,6 +296,7 @@ const Outward = () => {
                 <Input
                   type="text"
                   style={inputStyle2}
+                  disabled={!inwardData}
                   onChange={(event) => {
                     setServiceCharge(event.target.value);
                   }}
@@ -304,6 +308,7 @@ const Outward = () => {
                 <Input
                   type="text"
                   style={inputStyle2}
+                  disabled={!inwardData}
                   onChange={(event) => {
                     setPartCharge(event.target.value);
                   }}
@@ -354,6 +359,7 @@ const Outward = () => {
                     fontWeight: "600",
                     width: "180px",
                   }}
+                  disabled={!inwardData}
                 >
                   Create Outward
                 </Button>

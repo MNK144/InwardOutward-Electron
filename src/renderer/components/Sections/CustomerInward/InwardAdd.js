@@ -225,6 +225,7 @@ const InwardAdd = ({
               <Input
                 type="text"
                 style={inputStyle}
+                disabled={!customerID}
                 onChange={(event) => {
                   setReceivedFrom(event.target.value);
                 }}
@@ -236,6 +237,7 @@ const InwardAdd = ({
               <Input
                 type="date"
                 style={inputStyle}
+                disabled={!customerID}
                 onChange={(event) => {
                   setInwardDate(event.target.value);
                 }}
@@ -249,6 +251,7 @@ const InwardAdd = ({
               <Input
                 type="text"
                 style={inputStyle2}
+                disabled={!customerID}
                 onChange={(event) => {
                   setProducts(event.target.value);
                 }}
@@ -260,6 +263,7 @@ const InwardAdd = ({
               <Input
                 type="text"
                 style={inputStyle2}
+                disabled={!customerID}
                 onChange={(event) => {
                   setSerialNo(event.target.value);
                 }}
@@ -271,6 +275,7 @@ const InwardAdd = ({
               <Input
                 type="text"
                 style={inputStyle2}
+                disabled={!customerID}
                 onChange={(event) => {
                   setProblem(event.target.value);
                 }}
@@ -282,6 +287,7 @@ const InwardAdd = ({
               <Input
                 type="text"
                 style={inputStyle2}
+                disabled={!customerID}
                 onChange={(event) => {
                   setRemarks(event.target.value);
                 }}
@@ -296,6 +302,7 @@ const InwardAdd = ({
                   fontWeight: "600",
                   width: "140px",
                 }}
+                disabled={!customerID}
               >
                 Add Product
               </Button>
@@ -319,6 +326,7 @@ const InwardAdd = ({
               <Input
                 type="number"
                 style={{ marginLeft: "3px", width: "120px" }}
+                disabled={!customerID}
                 onChange={(event) => {
                   setServiceCharge(event.target.value);
                 }}
@@ -330,6 +338,7 @@ const InwardAdd = ({
               <Input
                 type="number"
                 style={{ marginLeft: "3px", width: "120px" }}
+                disabled={!customerID}
                 onChange={(event) => {
                   setPartCharge(event.target.value);
                 }}
@@ -344,6 +353,7 @@ const InwardAdd = ({
                   fontWeight: "600",
                   width: "160px",
                 }}
+                disabled={!customerID}
               >
                 {!editMode ? "Create Inward" : "Edit Inward"}
               </Button>

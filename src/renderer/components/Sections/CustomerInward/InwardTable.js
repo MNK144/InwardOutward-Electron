@@ -239,21 +239,19 @@ const InwardTable = ({
       minWidth: "135px",
       maxWidth: "250px",
       sortFunction: (a, b) => {
-        // const d1 = a.date.substring(6,10)+"-"+a.date.substring(3,5)+"-"+a.date.substring(0,2);
-        // const d2 = b.date.substring(6,10)+"-"+b.date.substring(3,5)+"-"+b.date.substring(0,2);
-        const d1 =
-          a.date.substring(6, 10) +
-          "-" +
-          a.date.substring(3, 5) +
-          "-" +
-          a.date.substring(0, 2);
-        const d2 =
-          b.date.substring(6, 10) +
-          "-" +
-          b.date.substring(3, 5) +
-          "-" +
-          b.date.substring(0, 2);
-        return new Date(d1) - new Date(d2);
+        // const d1 =
+        //   a.inwardDate.substring(6, 10) +
+        //   "-" +
+        //   a.inwardDate.substring(3, 5) +
+        //   "-" +
+        //   a.inwardDate.substring(0, 2);
+        // const d2 =
+        //   b.inwardDate.substring(6, 10) +
+        //   "-" +
+        //   b.inwardDate.substring(3, 5) +
+        //   "-" +
+        //   b.inwardDate.substring(0, 2);
+        return new Date(a.inwardDate) - new Date(b.inwardDate);
       },
     },
     {

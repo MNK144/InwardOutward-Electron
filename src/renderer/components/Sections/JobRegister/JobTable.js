@@ -124,8 +124,8 @@ const JobTable = ({ filter }) => {
       name: "Job Id",
       selector: (row) => row.jobID,
       sortable: true,
-      minWidth: "120px",
-      maxWidth: "140px",
+      minWidth: "160px",
+      maxWidth: "180px",
     },
     {
       name: "Customer",
@@ -139,7 +139,7 @@ const JobTable = ({ filter }) => {
       },
       sortable: true,
       minWidth: "180px",
-      maxWidth: "200px",
+      // maxWidth: "200px",
     },
     {
       name: "Inward Date",
@@ -203,7 +203,7 @@ const JobTable = ({ filter }) => {
         if (!inward || !inward[0]) return "";
         return inward[0]?.receivedFrom;
       },
-      maxWidth: "150px",
+      maxWidth: "170px",
     },
     {
       name: "Actions",

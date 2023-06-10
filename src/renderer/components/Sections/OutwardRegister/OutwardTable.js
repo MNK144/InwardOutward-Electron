@@ -178,12 +178,12 @@ const OutwardTable = ({ filter }) => {
     {
       name: "Job Status",
       selector: (row) => row.jobStatus,
-      maxWidth: "150px",
+      maxWidth: "180px",
     },
     {
       name: "Remarks",
       selector: (row) => row.remarks,
-      maxWidth: "250px",
+      minWidth: "250px",
     },
     {
       name: "Actions",

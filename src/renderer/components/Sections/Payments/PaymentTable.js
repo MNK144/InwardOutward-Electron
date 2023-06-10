@@ -177,7 +177,7 @@ const PaymentTable = ({
         if (!customer) return "";
         return customer[0]?.name;
       },
-      sortable: true,
+      // sortable: true,
       minWidth: "140px",
     },
     {
@@ -273,7 +273,7 @@ const PaymentTable = ({
         if (!customer) return "";
         return customer[0]?.name;
       },
-      sortable: true,
+      // sortable: true,
       minWidth: "140px",
     },
     {

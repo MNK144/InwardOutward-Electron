@@ -112,6 +112,13 @@ const CustomerTable = ({ setCustomerCount, handleEdit }) => {
       sortable: true,
       minWidth: "160px",
       maxWidth: "210px",
+      sortFunction: (a,b) => {
+        const n1 = a.name.toLowerCase();
+        const n2 = b.name.toLowerCase();
+        if(n1>n2) return 1;
+        else if(n1===n2) return 0;
+        else return -1;
+      }
     },
     {
       name: "Address",

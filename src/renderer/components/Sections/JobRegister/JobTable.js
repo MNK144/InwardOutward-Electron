@@ -137,7 +137,7 @@ const JobTable = ({ filter }) => {
         if (!customer) return "";
         return customer[0]?.name;
       },
-      sortable: true,
+      // sortable: true,
       minWidth: "180px",
       // maxWidth: "200px",
     },

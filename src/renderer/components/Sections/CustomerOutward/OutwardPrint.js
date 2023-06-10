@@ -186,7 +186,7 @@ const OutwardPrint = () => {
             </div>
           </main>
           <footer>
-            Inward Slip was created on a computer and is valid without the
+            Outward Slip was created on a computer and is valid without the
             signature and seal.
           </footer>
         </div>

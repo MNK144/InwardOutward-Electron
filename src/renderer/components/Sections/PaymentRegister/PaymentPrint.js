@@ -168,7 +168,7 @@ const PaymentPrint = () => {
             </div>
           </main>
           <footer>
-            Inward Slip was created on a computer and is valid without the
+            Payment Slip was created on a computer and is valid without the
             signature and seal.
           </footer>
         </div>

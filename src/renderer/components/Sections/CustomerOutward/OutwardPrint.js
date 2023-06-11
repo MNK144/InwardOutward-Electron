@@ -78,9 +78,9 @@ const OutwardPrint = () => {
           <button className="btn btn-info" onClick={()=>window.print()}>
             Print
           </button>
-          <button className="btn btn-info">
+          {/* <button className="btn btn-info">
             Export as PDF
-          </button>
+          </button> */}
         </div>
         <hr />
       </div>

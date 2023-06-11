@@ -1,7 +1,7 @@
 import { editPayment, getPaymentByID, getPayments, insertPayment, insertTransaction } from "renderer/database/payments";
 import API from "./API";
 
-const PaymentService = {
+const PaymentServiceLegacy = {
   getPayment: async function (id) {
     return await API.get("/payments/" + id);
   },
@@ -25,7 +25,7 @@ const PaymentService = {
   },
 };
 
-const PaymentServiceNew = {
+const PaymentService = {
   getPayment: async function (id) {
     const payment = await getPaymentByID(id);
     return {data: payment};

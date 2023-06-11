@@ -28,7 +28,7 @@ export const getOutwardByID = async (id) => {
 
 export const insertOutward = async (outwardData) => {
   const id = uuid();
-  const data = { id, ...outwardData };
+  const data = { id, ...outwardData, isActive: true };
   console.log('data for insertion', data);
   const result = await db.outwards.insert(data);
   return result._data;

@@ -28,7 +28,7 @@ export const getPaymentByID = async (id) => {
 
 export const insertPayment = async (paymentData) => {
   const id = uuid();
-  const data = { id, ...paymentData,  paymentDate: invoiceDate, isPending: true, transactionData: []};
+  const data = { id, ...paymentData,  paymentDate: paymentData.invoiceDate, isPending: true, transactionData: []};
   console.log('data for insertion', data);
   const result = await db.payments.insert(data);
   return result._data;
@@ -59,7 +59,7 @@ export const insertTransaction = async (paymentID, transactionData) => {
   const payment = await getPaymentDocument(paymentID);
   const id = uuid();
   await payment.modify((prev)=>{
-    const transactions = prev.transactionData;
+    let transactions = Array.from(prev.transactionData);
     transactions.push({id, ...transactionData});
     return {...prev, transactionData: transactions};
   })

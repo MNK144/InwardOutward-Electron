@@ -1,7 +1,7 @@
 import { getOutwardByID, getOutwards, insertOutward, removeOutward, updateOutward } from "renderer/database/outwards";
 import API from "./API";
 
-const OutwardService = {
+const OutwardServiceLegacy = {
   getOutward: async function (id) {
     return await API.get("/outwards/" + id);
   },
@@ -22,7 +22,7 @@ const OutwardService = {
   },
 };
 
-const OutwardServiceNew = {
+const OutwardService = {
   getOutward: async function (id) {
     const outward = await getOutwardByID(id);
     return {data: outward};

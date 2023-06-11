@@ -31,7 +31,11 @@ export const insertInward = async (inwardData) => {
   const data = { id, ...inwardData };
   console.log('data for insertion', data);
   const result = await db.inwards.insert(data);
-  return result._data;
+  return {
+    status: "Success",
+    message: "New InwardData Added Successfully",
+    inwardID: id,
+  };
 };
 
 export const removeInward = async (id) => {

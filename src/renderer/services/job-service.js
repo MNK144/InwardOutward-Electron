@@ -1,7 +1,7 @@
 import { getJobByID, getJobIDCount, getJobs, insertJob, updateJob, updateJobIDCount } from "renderer/database/jobs";
 import API from "./API";
 
-const JobService = {
+const JobServiceLegacy = {
   getJobCount: async (year) => {
     return await API.post("/jobs/count/get", { year });
   },
@@ -22,7 +22,7 @@ const JobService = {
   },
 };
 
-const JobServiceNew = {
+const JobService = {
   getJobCount: async (year) => {
     const jobCount = await getJobIDCount(year);
     return {data: jobCount};

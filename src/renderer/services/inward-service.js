@@ -1,7 +1,7 @@
 import { getInwardByID, getInwards, insertInward, removeInward, updateInward } from "renderer/database/inwards";
 import API from "./API";
 
-const InwardService = {
+const InwardServiceLegacy = {
   getInward: async function (id) {
     return await API.get("/inwards/" + id);
   },
@@ -22,7 +22,7 @@ const InwardService = {
   },
 };
 
-const InwardServiceNew = {
+const InwardService = {
   getInward: async function (id) {
     const inward = await getInwardByID(id);
     return {data: inward};
@@ -34,7 +34,7 @@ const InwardServiceNew = {
   createInward: async function (inwardData) {
     const inward = await insertInward(inwardData);
     if(inward) {
-      return {data: {inwardID: inward.id}};
+      return {data: inward};
     } else {
       throw "Error Inserting Inward";
     }

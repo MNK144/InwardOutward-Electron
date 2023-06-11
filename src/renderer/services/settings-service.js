@@ -1,7 +1,7 @@
 import { getSettings, updateSettings } from "renderer/database/settings";
 import API from "./API";
 
-const SettingsService = {
+const SettingsServiceLegacy = {
   getCompanySettings: async function () {
     return await API.get("/settings/companySettings");
   },
@@ -10,7 +10,7 @@ const SettingsService = {
   },
 };
 
-const SettingsServiceNew = {
+const SettingsService = {
   getCompanySettings: async function () {
     const settings = await getSettings();
     return {data: settings};

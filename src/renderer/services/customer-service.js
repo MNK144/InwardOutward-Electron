@@ -1,7 +1,7 @@
 import { removeCustomer, getCustomerByID, getCustomers, insertCustomer, updateCustomer } from "renderer/database/customers";
 import API from "./API";
 
-const CustomerService = {
+const CustomerServiceLegacy = {
   getCustomer: async function (customerId) {
     return await API.get("/customers/" + customerId);
   },
@@ -22,7 +22,7 @@ const CustomerService = {
   },
 };
 
-export const CustomerServiceNew = {
+const CustomerService = {
   getCustomer: async function (customerId) {
     const customer = await getCustomerByID(customerId);
     return { data: customer };

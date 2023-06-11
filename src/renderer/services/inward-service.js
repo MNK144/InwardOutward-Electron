@@ -1,26 +1,25 @@
 import { getInwardByID, getInwards, insertInward, removeInward, updateInward } from "renderer/database/inwards";
-import API from "./API";
-
-const InwardServiceLegacy = {
-  getInward: async function (id) {
-    return await API.get("/inwards/" + id);
-  },
-  getAllInwards: async function () {   
-    return await API.get("/inwards");
-  },
-  createInward: async function (inwardData) {
-    return await API.post("/inwards", { inwardData });
-  },
-  editInward: async function (id, inwardData) {
-    return await API.put("/inwards", {
-        id,
-        inwardData,
-      });
-  },
-  deleteInward: async function (id) {
-    return await API.delete("/inwards", { data: { id } });
-  },
-};
+// import API from "./API";
+// const InwardServiceLegacy = {
+//   getInward: async function (id) {
+//     return await API.get("/inwards/" + id);
+//   },
+//   getAllInwards: async function () {   
+//     return await API.get("/inwards");
+//   },
+//   createInward: async function (inwardData) {
+//     return await API.post("/inwards", { inwardData });
+//   },
+//   editInward: async function (id, inwardData) {
+//     return await API.put("/inwards", {
+//         id,
+//         inwardData,
+//       });
+//   },
+//   deleteInward: async function (id) {
+//     return await API.delete("/inwards", { data: { id } });
+//   },
+// };
 
 const InwardService = {
   getInward: async function (id) {

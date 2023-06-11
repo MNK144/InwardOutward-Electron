@@ -1,3 +1,4 @@
+import { getOutwardByID, getOutwards, insertOutward, removeOutward, updateOutward } from "renderer/database/outwards";
 import API from "./API";
 
 const OutwardService = {
@@ -18,6 +19,33 @@ const OutwardService = {
   },
   deleteOutward: async function (id) {
     return await API.delete("/outwards", { data: { id } });
+  },
+};
+
+const OutwardServiceNew = {
+  getOutward: async function (id) {
+    const outward = await getOutwardByID(id);
+    return {data: outward};
+  },
+  getAllOutwards: async function () {   
+    const outwards = await getOutwards();
+    return {data: outwards};
+  },
+  createOutward: async function (outwardData) {
+    const outward = await insertOutward(outwardData);
+    if(outward) {
+      return {data: {outwardID: outward.id}}
+    } else {
+      throw "Error Inserting Outward";
+    }
+  },
+  editOutward: async function (id, outwardData) {
+    const result = await updateOutward(id,outwardData);
+    return {data: result};
+  },
+  deleteOutward: async function (id) {
+    const result = await removeOutward(id);
+    return {data: result};
   },
 };
 

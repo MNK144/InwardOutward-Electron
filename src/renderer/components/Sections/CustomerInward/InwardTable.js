@@ -180,26 +180,10 @@ const InwardTable = ({
       })
       .finally(() => {
         setDeleteModalActive(false);
-        setDeleteId("");
-      });
-
-    CustomerService.deleteCustomer(deleteId)
-      .then((response) => {
-        console.log(response.data);
-        if (response.data.status === "Success") {
-          console.log("Deleted Successfully");
-        } else {
-          console.log("Failed to delete");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setDeleteModalActive(false);
         setDataChanged(deleteId);
         setDeleteId("");
       });
+      
   };
 
   const columns = [

@@ -1,3 +1,4 @@
+import { getSettings, updateSettings } from "renderer/database/settings";
 import API from "./API";
 
 const SettingsService = {
@@ -6,6 +7,17 @@ const SettingsService = {
   },
   updateCompanySettings: async function (companySettingsData) {   
     return await API.put("/settings/companySettings",{companySettingsData});
+  },
+};
+
+const SettingsServiceNew = {
+  getCompanySettings: async function () {
+    const settings = await getSettings();
+    return {data: settings};
+  },
+  updateCompanySettings: async function (companySettingsData) {   
+    const result = await updateSettings(companySettingsData);
+    return {data: result};
   },
 };
 

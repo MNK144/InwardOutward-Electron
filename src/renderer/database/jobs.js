@@ -12,11 +12,12 @@ const getJobCountDocument = async (year) => {
   return jobCount[0];
 };
 
-export const getJobCount = async (year) => {
+export const getJobIDCount = async (year) => {
   const jobCount = await getJobCountDocument(year);
   console.log('jobCountDocument', jobCount);
   if (jobCount) {
     return {
+      status: "Success",
       message: 'Year Found',
       count: jobCount._data.count,
     };
@@ -27,25 +28,30 @@ export const getJobCount = async (year) => {
     };
     await db.jobcount.insert(yearData);
     return {
+      status: "Created",
       message: 'Year Data Created',
       count: 1,
     };
   }
 };
 
-export const updateJobCount = async (year) => {
+export const updateJobIDCount = async (year) => {
   const jobCount = await getJobCountDocument(year);
   if (jobCount) {
     await jobCount.modify((prev) => {
       const updated = { ...prev, count: prev.count + 1 };
       return updated;
     });
+    return {
+      status: "Success",
+      message: "JobCount Updated",
+    }
   } else {
     throw 'Year not found';
   }
 };
 
-export const getAllJobs = async () => {
+export const getJobs = async () => {
   const jobs = await db.jobs.find({}).exec();
   const jobsData = jobs.map((jobs) => jobs._data);
   console.log('jobsData', jobsData);
@@ -78,9 +84,13 @@ export const insertJob = async (jobData) => {
   return result._data;
 };
 
-export const deleteJob = async (id) => {
+export const removeJob = async (id) => {
   const job = await getJobDocument(id);
   const dltOp = await job.remove();
+  return {
+    status: "Success",
+    message: "JobData Deleted Successfully",
+  }
 };
 
 export const updateJob = async (id, jobData) => {
@@ -89,4 +99,8 @@ export const updateJob = async (id, jobData) => {
     const updated = { ...prev, ...jobData };
     return updated;
   });
+  return {
+    status: "Success",
+    message: "JobData Updated Successfully",
+  }
 };

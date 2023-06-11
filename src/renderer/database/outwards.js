@@ -1,7 +1,7 @@
 import { db } from './rxdb';
 import { v4 as uuid } from 'uuid';
 
-export const getAllOutwards = async () => {
+export const getOutwards = async () => {
   const outwards = await db.outwards.find({}).exec();
   const outwardsData = outwards.map((outwards) => outwards._data);
   console.log('outwardsData', outwardsData);
@@ -34,9 +34,13 @@ export const insertOutward = async (outwardData) => {
   return result._data;
 };
 
-export const deleteOutward = async (id) => {
+export const removeOutward = async (id) => {
   const outward = await getOutwardDocument(id);
   const dltOp = await outward.remove();
+  return {
+    status: "Success",
+    message: "OutwardData Deleted Successfully",
+  }
 };
 
 export const updateOutward = async (id, outwardData) => {
@@ -45,4 +49,8 @@ export const updateOutward = async (id, outwardData) => {
     const updated = {...prev, ...outwardData};
     return updated;
   })
+  return {
+    status: "Success",
+    message: "OutwardData Updated Successfully",
+  }
 }

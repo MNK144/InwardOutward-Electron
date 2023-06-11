@@ -1,7 +1,7 @@
 import { db } from './rxdb';
 import { v4 as uuid } from 'uuid';
 
-export const getAllCustomers = async () => {
+export const getCustomers = async () => {
   const customers = await db.customers.find({}).exec();
   const customersData = customers.map((customer) => customer._data);
   console.log('customersData', customersData);
@@ -34,9 +34,13 @@ export const insertCustomer = async (customerData) => {
   return result._data;
 };
 
-export const deleteCustomer = async (id) => {
+export const removeCustomer = async (id) => {
   const customer = await getCustomerDocument(id);
   const dltOp = await customer.remove();
+  return {
+    status: "Success",
+    message: "CustomerData Deleted Successfully",
+  }
 };
 
 export const updateCustomer = async (id, customerData) => {
@@ -45,4 +49,8 @@ export const updateCustomer = async (id, customerData) => {
     const updated = {...prev, ...customerData};
     return updated;
   })
+  return {
+    status: "Success",
+    message: "CustomerData Updated Successfully",
+  }
 }

@@ -1,3 +1,4 @@
+import { editPayment, getPaymentByID, getPayments, insertPayment, insertTransaction } from "renderer/database/payments";
 import API from "./API";
 
 const PaymentService = {
@@ -21,6 +22,33 @@ const PaymentService = {
       paymentID,
       transactionData,
     });
+  },
+};
+
+const PaymentServiceNew = {
+  getPayment: async function (id) {
+    const payment = await getPaymentByID(id);
+    return {data: payment};
+  },
+  getAllPayments: async function () {
+    const payments = await getPayments();
+    return {data: payments};
+  },
+  createPayment: async function (paymentData) {
+    const payment = await insertPayment(paymentData);
+    if(payment) {
+      return {data: {paymentID: payment.id}};
+    } else {
+      throw "Error Inserting Payment";
+    }
+  },
+  updatePayment: async function (id, paymentData) {
+    const result = await editPayment(id,paymentData);
+    return {data: result}
+  },
+  createTransaction: async function (paymentID, transactionData) {
+    const transaction = await insertTransaction(paymentID, transactionData);
+    return {data: transaction};
   },
 };
 

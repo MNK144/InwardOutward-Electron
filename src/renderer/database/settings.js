@@ -12,6 +12,7 @@ const getSettingsDocument = async () => {
   return settings[0];
 };
 
+//TODO
 export const initSettings = async () => {
   const settings = getSettingsDocument();
   if (!settings) {
@@ -33,6 +34,7 @@ export const initSettings = async () => {
 export const getSettings = async () => {
   const settings = await getSettingsDocument();
   const settingsData = settings?._data;
+  if(!settingsData) await initSettings();
   console.log('settingsData', settingsData);
   return settingsData;
 };
@@ -43,4 +45,8 @@ export const updateSettings = async (settingsData) => {
     const updated = { ...prev, ...settingsData };
     return updated;
   });
+  return {
+    status: "Success",
+    message: "CompanySettings Updated Successfully",
+  }
 };

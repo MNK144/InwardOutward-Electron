@@ -2,13 +2,13 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 
 import {initRXDB, getAllData} from "./database/rxdb";
-import { deleteCustomer, getAllCustomers, getCustomerByID, insertCustomer, updateCustomer } from './database/customers';
-import { deleteInward, getAllInwards, insertInward, updateInward } from './database/inwards';
 import { v4 as uuid } from "uuid";
-import { deleteOutward, getAllOutwards, getOutwardByID, insertOutward, updateOutward } from './database/outwards';
-import { deletePayment, getAllPayments, getPaymentByID, insertPayment, updatePayment } from './database/payments';
-import { getSettings, initSettings, updateSettings } from './database/settings';
-import { deleteJob, getAllJobs, getJobByID, getJobCount, insertJob, updateJob, updateJobCount } from './database/jobs';
+// import { deleteCustomer, getAllCustomers, getCustomerByID, insertCustomer, updateCustomer } from './database/customers';
+// import { deleteInward, getAllInwards, insertInward, updateInward } from './database/inwards';
+// import { deleteOutward, getAllOutwards, getOutwardByID, insertOutward, updateOutward } from './database/outwards';
+// import { deletePayment, getAllPayments, getPaymentByID, insertPayment, updatePayment } from './database/payments';
+// import { getSettings, initSettings, updateSettings } from './database/settings';
+// import { deleteJob, getAllJobs, getJobByID, getJobCount, insertJob, updateJob, updateJobCount } from './database/jobs';
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);

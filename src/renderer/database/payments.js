@@ -1,7 +1,7 @@
 import { db } from './rxdb';
 import { v4 as uuid } from 'uuid';
 
-export const getAllPayments = async () => {
+export const getPayments = async () => {
   const payments = await db.payments.find({}).exec();
   const paymentsData = payments.map((payments) => payments._data);
   console.log('paymentsData', paymentsData);
@@ -28,21 +28,44 @@ export const getPaymentByID = async (id) => {
 
 export const insertPayment = async (paymentData) => {
   const id = uuid();
-  const data = { id, ...paymentData };
+  const data = { id, ...paymentData,  paymentDate: invoiceDate, isPending: true, transactionData: []};
   console.log('data for insertion', data);
   const result = await db.payments.insert(data);
   return result._data;
 };
 
-export const deletePayment = async (id) => {
+export const removePayment = async (id) => {
   const payment = await getPaymentDocument(id);
   const dltOp = await payment.remove();
+  return {
+    status: "Success",
+    message: "PaymentData Deleted Successfully",
+  }
 };
 
-export const updatePayment = async (id, paymentData) => {
+export const editPayment = async (id, paymentData) => {
   const payment = await getPaymentDocument(id);
   await payment.modify((prev)=>{
     const updated = {...prev, ...paymentData};
     return updated;
   })
+  return {
+    status: "Success",
+    message: "PaymentData Updated Successfully",
+  }
+}
+
+export const insertTransaction = async (paymentID, transactionData) => {
+  const payment = await getPaymentDocument(paymentID);
+  const id = uuid();
+  await payment.modify((prev)=>{
+    const transactions = prev.transactionData;
+    transactions.push({id, ...transactionData});
+    return {...prev, transactionData: transactions};
+  })
+  return {
+    status: "Success",
+    message: "New Payment TransactionData Added Successfully",
+    transactionID: id,
+  }
 }

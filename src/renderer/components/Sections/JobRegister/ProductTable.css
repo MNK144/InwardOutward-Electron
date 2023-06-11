@@ -1,0 +1,23 @@
+.ProductTable {
+    margin-top: 0px;
+  }
+  
+  .productTable_table_empty {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  
+  .productTable_cell_actions {
+    display: flex;
+    width: 70px;
+    font-size: 19px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .productTable_cell_override {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  

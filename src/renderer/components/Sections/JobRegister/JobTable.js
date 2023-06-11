@@ -39,7 +39,7 @@ const customStyles = {
   },
 };
 
-const JobTable = ({ filter }) => {
+const JobTable = ({ filter, handleViewProducts }) => {
   const [companyData, setCompanyData] = useState();
   const [jobData, setJobData] = useState([]);
   const [outwardData, setOutwardData] = useState([]);
@@ -115,8 +115,14 @@ const JobTable = ({ filter }) => {
     }
   }, [outwardData, filter]);
 
-  const handleView = (id) => {
+  const handleView = (data) => {
     //do something
+    try {
+      const inward = inwardData.filter((iw)=>iw.id===data.inwardID)[0]; 
+      handleViewProducts(inward.inwardProducts);
+    } catch(e) {
+      console.log("error occured",e);
+    }
   };
 
   const columns = [
@@ -214,10 +220,13 @@ const JobTable = ({ filter }) => {
       cell: (row) => {
         return (
           <div className="JobTable_cell_actions">
-            <RiFileList3Fill
-              style={{ cursor: "pointer", color: "#2980b9" }}
-              onClick={handleView.bind(null, row)}
-            />
+            <div className="payments_actions_tooltip">
+              <span className="tooltiptext posleft">Product Details</span>
+              <RiFileList3Fill
+                style={{ cursor: "pointer", color: "#2980b9" }}
+                onClick={handleView.bind(null, row)}
+              />
+            </div>
           </div>
         );
       },

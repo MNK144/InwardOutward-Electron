@@ -6,6 +6,7 @@ import Card from "../../UI/Card";
 import InwardAddCustomer from "../CustomerInward/InwardAddCustomer";
 import { useEffect } from "react";
 import JobTable from "./JobTable";
+import ProductDetails from "./ProductDetails";
 
 const inputStyle = { marginLeft: "10px" };
 const inputStyle2 = { marginLeft: "10px", width: "320px" };
@@ -19,6 +20,9 @@ const JobRegister = () => {
   const [endDate, setEndDate] = useState();
 
   const [filter,setFilter] = useState();
+  
+  const [productDetailsModal, setProductDetailsModal] = useState(false);
+  const [productData, setProductData] = useState();
 
   useEffect(()=>{
     handleFilter();
@@ -54,6 +58,15 @@ const JobRegister = () => {
     setEndDate(undefined);
   }
 
+  const handleViewProducts = (data) => {
+     //do something
+     setProductData(data);
+     setProductDetailsModal(true);
+  }
+  const handleProductsClose = () => {
+    setProductDetailsModal(false);
+  }
+
   return (
     <Card>
       {selectCustomer && (
@@ -62,6 +75,12 @@ const JobRegister = () => {
             handleSelect={handleCustomerSelect}
           />
         )}
+      {productDetailsModal && (
+        <ProductDetails 
+          onClose={handleProductsClose}
+          productData={productData}
+        />
+      )}
       <div className="JobRegister">
         <form className="JobRegister_form">
           <div className="JobRegister_formDivider">
@@ -113,7 +132,7 @@ const JobRegister = () => {
         {/* <div className="JobRegister_topbar">
           <p>Total Inwards: {inwardCount}</p>
         </div> */}
-        <JobTable filter={filter} />
+        <JobTable filter={filter} handleViewProducts={handleViewProducts} />
       </div>
     </Card>
   );

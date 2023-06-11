@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 
 addRxPlugin(RxDBDevModePlugin);
 
-let db;
+export let db;
 
 export const initRXDB = async () => {
   db = await createRxDatabase({
@@ -42,17 +42,29 @@ export const initRXDB = async () => {
   console.log("db instance",db);
 };
 
-export const insertTestData = async () => {
-    await db.customers.insert({
-      id: uuid(),
-      name: 'Manank',
-      address: 'A-123 XYZ Society, Ahmedabad',
-      phone: "9876543210",
-      email: "manank123@gmail.com",
-    });
-};
+// export const insertTestData = async () => {
+//     await db.customers.insert({
+//       id: uuid(),
+//       name: 'Manank',
+//       address: 'A-123 XYZ Society, Ahmedabad',
+//       phone: "9876543210",
+//       email: "manank123@gmail.com",
+//     });
+// };
 
-export const getData = async () => {
-  const foundDocuments = await db.customers.find({}).exec();
-  console.log('foundDocuments', foundDocuments);
+export const getAllData = async () => {
+  const customers = await db.customers.find({}).exec();
+  console.log('customers', customers);
+  const inwards = await db.inwards.find({}).exec();
+  console.log('inwards', inwards);
+  const outwards = await db.outwards.find({}).exec();
+  console.log('outwards', outwards);
+  const payments = await db.payments.find({}).exec();
+  console.log('payments', payments);
+  const jobs = await db.jobs.find({}).exec();
+  console.log('jobs', jobs);
+  const jobcount = await db.jobcount.find({}).exec();
+  console.log('jobcount', jobcount);
+  const settings = await db.settings.find({}).exec();
+  console.log('settings', settings);
 };

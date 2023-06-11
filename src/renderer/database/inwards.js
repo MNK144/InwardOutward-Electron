@@ -41,7 +41,7 @@ export const deleteInward = async (id) => {
 
 export const updateInward = async (id, inwardData) => {
   const inward = await getInwardDocument(id);
-  inward.modify((prev)=>{
+  await inward.modify((prev)=>{
     const updated = {...prev, ...inwardData};
     return updated;
   })

@@ -41,7 +41,7 @@ export const deleteCustomer = async (id) => {
 
 export const updateCustomer = async (id, customerData) => {
   const customer = await getCustomerDocument(id);
-  customer.modify((prev)=>{
+  await customer.modify((prev)=>{
     const updated = {...prev, ...customerData};
     return updated;
   })

@@ -7,6 +7,8 @@ import { deleteInward, getAllInwards, insertInward, updateInward } from './datab
 import { v4 as uuid } from "uuid";
 import { deleteOutward, getAllOutwards, getOutwardByID, insertOutward, updateOutward } from './database/outwards';
 import { deletePayment, getAllPayments, getPaymentByID, insertPayment, updatePayment } from './database/payments';
+import { getSettings, initSettings, updateSettings } from './database/settings';
+import { deleteJob, getAllJobs, getJobByID, getJobCount, insertJob, updateJob, updateJobCount } from './database/jobs';
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);
@@ -148,6 +150,41 @@ const handleDBTest = async () => {
   // ]})
   // await deletePayment('9ec25089-c64b-4b6c-895d-1d8b012f64e9');
 
+  // await updateSettings({  companyName: "Shivam Computers",
+  // address: "E-242 Sumel Business Park-6, Dudheswar Road, Ahmedabad",
+  // contact: "9725494292",
+  // email: "patel_sunil7476@yahoo.in",
+  // jobID: "SC",
+  // inwardTC:
+  //   "Items should be collected within 30 days after approval of estimate.",
+  // outwardTC: "No guarantee on repaired items once the item leaves shop.",
+  // paymentTC: "No refunds will be issued.", })
+
+  // const a = await getSettings();
+  // await initSettings();
+  // console.log('a',a);
+  //
+  // const b = await updateJobCount("2023");
+  // console.log("b",b);
+  // const a = await getJobCount("2023");
+  // console.log('a',a);
+
+  // const a = await getAllJobs();
+  // console.log("a",a);
+  // const b = await getJobByID("cce04e7a-d236-49a6-9d13-a51b29882a93");
+  // console.log("b",b);
+  // const jdt = {
+  //   jobID: "SC/2022/3",
+  //   paymentID: "a07f0341-51e3-49d6-a79a-e7e74ad68e5a",
+  //   outwardID: "bced650c-3013-4dbc-b483-e16c6ce8d90f",
+  //   inwardID: "548431bd-b36b-4e9c-b3bd-270be00be217",
+  //   customerID: "16fb8f7c-0f66-4c10-9fda-555bd6fd3828",
+  //   inwardDate: "2022-12-20",
+  // }
+  // const c = await insertJob(jdt);
+  // console.log("c",c);
+  // await deleteJob("4a8a9e7a-ab18-4699-97c3-3f0068d20373");
+  // await updateJob("cce04e7a-d236-49a6-9d13-a51b29882a93", { jobID: "SC/2023/1"})
 }
 handleDBTest();
 

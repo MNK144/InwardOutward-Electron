@@ -41,7 +41,7 @@ export const deleteOutward = async (id) => {
 
 export const updateOutward = async (id, outwardData) => {
   const outward = await getOutwardDocument(id);
-  outward.modify((prev)=>{
+  await outward.modify((prev)=>{
     const updated = {...prev, ...outwardData};
     return updated;
   })

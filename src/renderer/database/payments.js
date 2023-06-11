@@ -41,7 +41,7 @@ export const deletePayment = async (id) => {
 
 export const updatePayment = async (id, paymentData) => {
   const payment = await getPaymentDocument(id);
-  payment.modify((prev)=>{
+  await payment.modify((prev)=>{
     const updated = {...prev, ...paymentData};
     return updated;
   })

@@ -21,7 +21,7 @@ const getCustomerDocument = async (id) => {
 
 export const getCustomerByID = async (id) => {
   const customer = await getCustomerDocument(id);
-  const customerData = customer._data;
+  const customerData = customer?._data;
   console.log('customerData', customerData);
   return customerData;
 };
@@ -31,6 +31,7 @@ export const insertCustomer = async (customerData) => {
   const data = { id, ...customerData };
   console.log('data for insertion', data);
   const result = await db.customers.insert(data);
+  return result._data;
 };
 
 export const deleteCustomer = async (id) => {
